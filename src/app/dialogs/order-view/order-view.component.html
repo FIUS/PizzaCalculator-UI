@@ -1,5 +1,42 @@
 <mat-dialog-content>
-  Text
+  <h3>Bestellansicht</h3>
+  <!--
+
+  <div *ngFor="let orderItem of order">
+    <div class="example-box flex flex-column" cdkDrag>
+      <div *ngFor="let ingredient of orderItem.ingredients">
+        {{ingredient}}
+      </div>
+    </div>
+  </div>
+-->
+  <div cdkDropListGroup>
+
+    <!-- left side -->
+    <div class="example-container">
+      <div cdkDropList [cdkDropListData]="left" class="example-list" (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of left" cdkDrag>
+          <div *ngFor="let ingredient of item.ingredients">
+            {{ingredient}}
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- right side-->
+    <div class="example-container">
+      <div cdkDropList [cdkDropListData]="right" class="example-list" (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of right" cdkDrag>
+          <div *ngFor="let ingredient of item.ingredients">
+            {{ingredient}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Ok</button>

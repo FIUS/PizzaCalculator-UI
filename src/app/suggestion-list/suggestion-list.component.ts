@@ -23,7 +23,6 @@ export class SuggestionListComponent implements OnInit, OnDestroy {
       this.teamName = params['teamName'];
 
       this.subPizzas = this.apiService.getPizzas(this.teamName).subscribe(val => {
-        console.log(val);
         this.pizzas = val;
       });
     });
