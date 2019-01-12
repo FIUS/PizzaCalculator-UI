@@ -14,8 +14,11 @@ export class TeamPageComponent implements OnInit, OnDestroy {
 
   subParam: Subscription;
   subIngredients: Subscription;
+  subTemplate: Subscription;
 
   teamName: string;
+
+  ingredients: any;
 
   ngOnInit() {
     this.subParam = this.route.params.subscribe(params => {
@@ -24,6 +27,10 @@ export class TeamPageComponent implements OnInit, OnDestroy {
 
 
     this.subIngredients = this.apiService.getIngredients().subscribe(val => {
+      this.ingredients = val;
+    });
+
+    this.subTemplate = this.apiService.getTemplates().subscribe(val => {
       console.log(val);
     });
 

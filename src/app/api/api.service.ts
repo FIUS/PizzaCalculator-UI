@@ -48,5 +48,17 @@ export class ApiService {
     );
   }
 
+  getTemplates() {
+    const resource = 'templates';
+    const stream = this.getStreamSource(resource);
+
+    const result = this.http.get(this.hostAddress + resource)
+      .subscribe(val => stream.next(Object.freeze(val)));
+
+    return (stream.asObservable() as Observable<Readonly<ApiObject[]>>).pipe(
+      filter(data => data !== undefined)
+    );
+  }
+
 }
 
