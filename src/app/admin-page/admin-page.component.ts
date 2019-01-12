@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { OrderViewComponent } from '../dialogs/order-view/order-view.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-admin-page',
@@ -9,7 +11,7 @@ import { Subscription } from 'rxjs';
 })
 export class AdminPageComponent implements OnInit, OnDestroy {
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private dialog: MatDialog, ) {
     this.numberOfThings = 1;
   }
 
@@ -35,7 +37,7 @@ export class AdminPageComponent implements OnInit, OnDestroy {
   }
 
   showOrderPreview() {
-
+    const dialogRef = this.dialog.open(OrderViewComponent);
   }
 
   ngOnInit() {

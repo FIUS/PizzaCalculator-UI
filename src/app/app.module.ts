@@ -23,6 +23,7 @@ import { ErrorMessageComponent } from './dialogs/error-message/error-message.com
 import { SuggestionListComponent } from './suggestion-list/suggestion-list.component';
 import { IngredientListComponent } from './ingredient-list/ingredient-list.component';
 import { TemplateListComponent } from './dialogs/template-list/template-list.component';
+import { OrderViewComponent } from './dialogs/order-view/order-view.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { TemplateListComponent } from './dialogs/template-list/template-list.com
     ErrorMessageComponent,
     SuggestionListComponent,
     IngredientListComponent,
-    TemplateListComponent
+    TemplateListComponent,
+    OrderViewComponent
   ],
   imports: [
     BrowserModule,
@@ -70,6 +72,7 @@ import { TemplateListComponent } from './dialogs/template-list/template-list.com
     // dialogs
     ErrorMessageComponent,
     TemplateListComponent,
+    OrderViewComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

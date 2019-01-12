@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, OnDestroy, OnChanges, Inject } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
 import { Subscription } from 'rxjs';
+import { MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-template-list',
@@ -16,12 +16,11 @@ export class TemplateListComponent implements OnInit, OnDestroy {
   teamName: string;
   templates;
 
-  constructor(private route: ActivatedRoute, private apiService: ApiService) { }
+  constructor(private apiService: ApiService, @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.teamName = data.teamName;
+  }
 
   ngOnInit() {
-    this.subParam = this.route.params.subscribe(params => {
-      this.teamName = params['teamName'];
-    });
 
     this.subTemplates = this.apiService.getTemplates().subscribe(val => {
       console.log(val);
@@ -41,7 +40,9 @@ export class TemplateListComponent implements OnInit, OnDestroy {
   }
 
   select(template) {
-    this.apiService.postTemplates(template, this.teamName);
+    this.apiService.postTemplates(template, this.teamName).subscribe(val => {
+      this.apiService.getPizzas(this.teamName);
+    });
   }
 
 }

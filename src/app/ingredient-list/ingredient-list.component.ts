@@ -42,7 +42,7 @@ export class IngredientListComponent implements OnInit, OnDestroy {
   }
 
   openTemplates(): void {
-    const dialogRef = this.dialog.open(TemplateListComponent);
+    const dialogRef = this.dialog.open(TemplateListComponent, { data: { teamName: this.teamName } });
   }
 
   ngOnInit() {

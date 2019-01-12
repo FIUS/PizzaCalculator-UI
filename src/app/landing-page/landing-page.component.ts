@@ -34,6 +34,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     if (this.teamTypingInput !== '' && this.teamTypingInput != null) {
 
       this.apiService.postTeam(this.teamTypingInput).subscribe(val => {
+        // TODO change routing to admin page with hash
         this.router.navigate(['/team/', this.teamTypingInput]);
       });
 

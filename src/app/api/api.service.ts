@@ -64,7 +64,7 @@ export class ApiService {
   }
 
   postTemplates(template, teamName) {
-    // TODO
+    return this.http.post(this.hostAddress + 'pizzas/templates', { 'teamname': teamName, 'template': template });
   }
 
   getTeams() {
