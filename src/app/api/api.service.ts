@@ -69,7 +69,6 @@ export class ApiService {
 
     const result = this.http.get(this.hostAddress + resource)
       .subscribe(val => {
-        console.log(val);
         stream.next(Object.freeze(val));
       });
 
