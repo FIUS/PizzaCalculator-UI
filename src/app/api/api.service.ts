@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
@@ -43,7 +43,7 @@ export class ApiService {
     const result = this.http.get(this.hostAddress + resource)
       .subscribe(val => {
         stream.next(Object.freeze(val));
-        console.log(val);
+        // console.log(val);
       });
 
     return (stream.asObservable() as Observable<Readonly<ApiObject[]>>).pipe(
@@ -81,5 +81,26 @@ export class ApiService {
     return this.http.post(this.hostAddress + 'teams', { 'teamname': teamName });
   }
 
+
+  getPizzas(teamName: string) {
+    const resource = 'pizzas';
+    const stream = this.getStreamSource(resource);
+
+
+    const params = new HttpParams().set('teamname', teamName);
+
+    const result = this.http.get(this.hostAddress + resource, { 'params': params })
+      .subscribe(val => {
+        stream.next(Object.freeze(val));
+      });
+
+    return (stream.asObservable() as Observable<Readonly<ApiObject[]>>).pipe(
+      filter(data => data !== undefined)
+    );
+  }
+
+  postPizza(ingredients, teamName) {
+    return this.http.post(this.hostAddress + 'pizzas', { 'teamname': teamName, 'ingredients': ingredients });
+  }
 }
 

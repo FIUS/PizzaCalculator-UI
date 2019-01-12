@@ -19,6 +19,7 @@ import { TeamPageComponent } from './team-page/team-page.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { FooterComponent } from './footer/footer.component';
 import { SuggestionComponent } from './suggestion/suggestion.component';
+import { ErrorMessageComponent } from './dialogs/error-message/error-message.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { SuggestionComponent } from './suggestion/suggestion.component';
     TeamPageComponent,
     AdminPageComponent,
     FooterComponent,
-    SuggestionComponent
+    SuggestionComponent,
+    ErrorMessageComponent
   ],
   imports: [
     BrowserModule,
@@ -57,6 +59,10 @@ import { SuggestionComponent } from './suggestion/suggestion.component';
     MatAutocompleteModule,
     MatCheckboxModule,
     MatSelectModule,
+  ],
+  entryComponents: [
+    // dialogs
+    ErrorMessageComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

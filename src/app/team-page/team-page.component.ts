@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ApiService } from '../api/api.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { ErrorMessageComponent } from '../dialogs/error-message/error-message.component';
 
 
 @Component({
@@ -12,41 +13,59 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 })
 export class TeamPageComponent implements OnInit, OnDestroy {
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute, ) { }
+  constructor(private apiService: ApiService, private route: ActivatedRoute, private dialog: MatDialog, ) { }
 
   subParam: Subscription;
   subIngredients: Subscription;
-  subTemplate: Subscription;
+  subPizzas: Subscription;
 
   teamName: string;
-
   ingredients: any;
+  pizzas: any;
 
-  typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
 
-  openDialog(): void {
+  selectedOptions: any;
 
+  onNgModelChange(e) {
+    console.log(e);
+  }
+
+  send() {
+    if (this.selectedOptions != null) {
+      if (this.selectedOptions.length <= 4) {
+        // valid sugggestion
+        this.apiService.postPizza(this.selectedOptions, this.teamName).subscribe(val => {
+        });
+      } else {
+        // error message
+        const dialogRef = this.dialog.open(ErrorMessageComponent, {
+          data: {
+            message: 'Es können maximal 4 Beläge ausgewählt werden.',
+          }
+        });
+      }
+    }
   }
 
   ngOnInit() {
     this.subParam = this.route.params.subscribe(params => {
       this.teamName = params['teamName'];
-    });
 
+      this.subPizzas = this.apiService.getPizzas(this.teamName).subscribe(val => {
+        console.log(val);
+        this.pizzas = val;
+      });
+    });
 
     this.subIngredients = this.apiService.getIngredients().subscribe(val => {
       this.ingredients = val;
     });
-
-    this.subTemplate = this.apiService.getTemplates().subscribe(val => {
-      console.log(val);
-    });
-
   }
 
   ngOnDestroy() {
     this.unsubscribe(this.subParam);
     this.unsubscribe(this.subIngredients);
+    this.unsubscribe(this.subPizzas);
   }
 
   unsubscribe(subscription: Subscription) {
@@ -55,4 +74,7 @@ export class TeamPageComponent implements OnInit, OnDestroy {
     }
   }
 
+  openTemplates(): void {
+
+  }
 }

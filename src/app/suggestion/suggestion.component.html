@@ -1,11 +1,11 @@
 <mat-card>
   <mat-card-header>
-    Header
+    {{name}}
   </mat-card-header>
   <mat-card-content>
-    <ng-container *ngFor="let element of ingredients">
+    <ng-container *ngFor="let ingredient of ingredients">
       <div>
-        {{element}}
+        {{ingredient}}
       </div>
     </ng-container>
   </mat-card-content>
