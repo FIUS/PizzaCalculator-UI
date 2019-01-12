@@ -1,0 +1,17 @@
+<div class="suggest pa2">
+  <div style="height: 10px"></div>
+  <button mat-raised-button (click)="openTemplates()">Vorlagen</button>
+  <div style="height: 40px"></div>
+  <button mat-raised-button (click)="send()">Vorschlag absenden</button>
+
+  <!-- Topping list-->
+  <mat-selection-list #ingredientSelection [(ngModel)]="selectedOptions">
+    <mat-list-option *ngFor="let ingredient of ingredients" [value]=ingredient>
+      {{ingredient.name}}
+    </mat-list-option>
+  </mat-selection-list>
+
+  <p>
+    Toppings selected: {{ingredientSelection.selectedOptions.selected.length}}/4
+  </p>
+</div>

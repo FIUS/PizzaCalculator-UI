@@ -20,6 +20,8 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
 import { FooterComponent } from './footer/footer.component';
 import { SuggestionComponent } from './suggestion/suggestion.component';
 import { ErrorMessageComponent } from './dialogs/error-message/error-message.component';
+import { SuggestionListComponent } from './suggestion-list/suggestion-list.component';
+import { IngredientListComponent } from './ingredient-list/ingredient-list.component';
 
 
 @NgModule({
@@ -30,7 +32,9 @@ import { ErrorMessageComponent } from './dialogs/error-message/error-message.com
     AdminPageComponent,
     FooterComponent,
     SuggestionComponent,
-    ErrorMessageComponent
+    ErrorMessageComponent,
+    SuggestionListComponent,
+    IngredientListComponent
   ],
   imports: [
     BrowserModule,

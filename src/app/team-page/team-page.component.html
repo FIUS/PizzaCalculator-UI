@@ -1,31 +1,15 @@
 <div class="title">
   <div>Team: {{teamName}}</div>
 </div>
-<div class="content">
+<div class="content flex">
 
   <!-- Pizzas -->
-  <div class="vote flex flex-wrap">
-    <ng-container *ngFor="let element of pizzas">
-      <!-- TODO Replace ingredients with array of pizza suggestions. -->
-      <app-suggestion [name]="element.name" votes="3" [ingredients]="element.ingredients"></app-suggestion>
-    </ng-container>
+  <div class="flex-grow-1 vote flex flex-wrap">
+    <app-suggestion-list></app-suggestion-list>
   </div>
 
   <!-- Ingredients -->
-  <div class="suggest pa2">
-    <div style="height: 10px"></div>
-    <button mat-raised-button (click)="openTemplates()">Vorlagen</button>
-    <div style="height: 40px"></div>
-    <button mat-raised-button (click)="send()">Vorschlag absenden</button>
-    <!-- Topping list-->
-    <mat-selection-list #ingredientSelection [(ngModel)]="selectedOptions" (ngModelChange)="onNgModelChange($event)">
-      <mat-list-option *ngFor="let ingredient of ingredients" [value]=ingredient>
-        {{ingredient.name}}
-      </mat-list-option>
-    </mat-selection-list>
-
-    <p>
-      Toppings selected: {{ingredientSelection.selectedOptions.selected.length}}/4
-    </p>
+  <div class="w25 suggest">
+    <app-ingredient-list></app-ingredient-list>
   </div>
 </div>
