@@ -1,3 +1,21 @@
-<p>
-  admin-page works!
-</p>
+<div class="title">
+  <div>Admin-Page for Team: {{teamName}}</div>
+</div>
+<div class="input">
+  <mat-form-field>
+    <input matInput>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select [(value)]="selectedOption">
+      <mat-option [value]="option">
+        Personen
+      </mat-option>
+      <mat-option [value]="option">
+        Pizzastücke
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div class="preview">
+  <button mat-raised-button (click)="showOrderPreview">Bestellansicht</button>
+</div>
