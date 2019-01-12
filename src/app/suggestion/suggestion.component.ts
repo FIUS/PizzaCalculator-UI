@@ -1,11 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-suggestion',
   templateUrl: './suggestion.component.html',
   styleUrls: ['./suggestion.component.css']
 })
-export class SuggestionComponent implements OnInit {
+export class SuggestionComponent implements OnChanges {
 
   @Input() name: string;
   @Input() ingredients: string[];
@@ -19,7 +19,10 @@ export class SuggestionComponent implements OnInit {
     //TODO: Implement the upvote and increment the votes: number.
   }
 
-  ngOnInit() {
+  ngOnChanges() {
+    if (this.ingredients == null) {
+      return;
+    }
     if (this.ingredients.length > 4) {
       this.ingredientsList.concat(this.ingredients.slice(0, 3));
     } else if (this.ingredients.length === 4) {
