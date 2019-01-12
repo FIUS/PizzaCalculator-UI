@@ -3,6 +3,10 @@ mat-card {
   font-size: xx-large;
 }
 
+mat-card > mat-card-header {
+  white-space: nowrap;
+}
+
 mat-card > mat-card-content {
   font-size: large;
   height: 4em;
