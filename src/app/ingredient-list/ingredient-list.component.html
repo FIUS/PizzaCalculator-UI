@@ -4,6 +4,10 @@
   <div style="height: 40px"></div>
   <button mat-raised-button (click)="send()">Vorschlag absenden</button>
 
+  <div class="pa2">
+    <mat-divider></mat-divider>
+  </div>
+
   <!-- Topping list-->
   <mat-selection-list #ingredientSelection [(ngModel)]="selectedOptions">
     <mat-list-option *ngFor="let ingredient of ingredients" [value]=ingredient>
