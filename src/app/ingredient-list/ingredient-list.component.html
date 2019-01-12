@@ -10,7 +10,7 @@
     <mat-divider></mat-divider>
   </div>
 
-  <div class="counter">
+  <div class="counter {{(ingredientSelection.selectedOptions.selected.length > 4 ? 'warning' : '')}}">
     Toppings selected: {{ingredientSelection.selectedOptions.selected.length}}/4
   </div>
 

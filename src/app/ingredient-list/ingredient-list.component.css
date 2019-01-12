@@ -6,3 +6,7 @@
 .counter {
   margin: 1em;
 }
+
+.warning {
+  color: red;
+}
