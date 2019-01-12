@@ -17,6 +17,7 @@ import { AppComponent } from './app.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { TeamPageComponent } from './team-page/team-page.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
     AppComponent,
     LandingPageComponent,
     TeamPageComponent,
-    AdminPageComponent
+    AdminPageComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

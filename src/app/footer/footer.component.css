@@ -1,0 +1,14 @@
+footer {
+  height: 100px;
+  padding: 10px;
+}
+
+.authors {
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+.links {
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+}
