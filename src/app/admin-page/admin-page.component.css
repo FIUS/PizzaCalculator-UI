@@ -17,6 +17,17 @@
   margin: 10px auto;
 }
 
-.input > mat-form-field {
+.input > div {
+  display: inline-flex;
+}
+
+.input mat-form-field {
   margin: 10px;
+  width: 150px;
+}
+
+.text {
+  margin-left: 10px;
+  margin-top: -15px;
+  margin-bottom: 10px;
 }

@@ -2,34 +2,45 @@
   <div>Admin-Page for Team: {{teamName}}</div>
 </div>
 <div class="input">
-  <!-- Number of Things -->
   <div>
-    <mat-form-field>
-      <input matInput type="number" [(ngModel)]="numberOfThings" (change)="numberValueChanged()">
-    </mat-form-field>
+    <!-- Number of Things -->
+    <div>
+      <mat-form-field>
+        <input matInput type="number" [(ngModel)]="numberOfThings" (change)="numberValueChanged()">
+      </mat-form-field>
+      <div class="text">
+        Gesamtzahl
+      </div>
+    </div>
 
-    <!-- Selector -->
-    <mat-form-field>
-      <mat-select [(ngModel)]="selectedOption">
-        <mat-option *ngFor="let option of optionsToChoose " [value]="option">
-          {{option}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
+    <!-- Vegetarien -->
+    <div>
+      <mat-form-field>
+        <input matInput type="number" [(ngModel)]="vegetarian" (change)="numberValueChanged()">
+      </mat-form-field>
+      <div class="text">
+        Anzahl Vegetarier
+      </div>
 
-  <!-- Vegetarien -->
-  <div>
-    <mat-form-field>
-      <input matInput type="number" [(ngModel)]="vegetarian" (change)="numberValueChanged()">
-    </mat-form-field>
-  </div>
+      <!-- Selector -->
+      <mat-form-field>
+        <mat-select [(ngModel)]="selectedOption">
+          <mat-option *ngFor="let option of optionsToChoose " [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
 
-  <!-- Pork -->
-  <div>
-    <mat-form-field>
-      <input matInput type="number" [(ngModel)]="pork" (change)="numberValueChanged()">
-    </mat-form-field>
+    <!-- Pork -->
+    <div>
+      <mat-form-field>
+        <input matInput type="number" [(ngModel)]="pork" (change)="numberValueChanged()">
+      </mat-form-field>
+      <div class="text">
+        Anzahl Schwein
+      </div>
+    </div>
   </div>
 
 
