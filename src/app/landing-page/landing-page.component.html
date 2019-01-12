@@ -4,11 +4,13 @@
 <div class="interactive">
   <div class="goto">
     <mat-form-field>
-      <mat-select placeholder="Go to page for team">
-        <mat-option value="Go to Team">Go to Team</mat-option>
+      <mat-select placeholder="Go to page for team" [(value)]="selectedTeam">
+        <mat-option *ngFor="let team of teams" [value]="team">
+          {{team}}
+        </mat-option>
       </mat-select>
     </mat-form-field>
-    <button mat-raised-button [routerLink]="['/team','myTeam']">Go to team page</button>
+    <button mat-raised-button (click)="goToTeam()">Go to team page</button>
   </div>
   <div class="create">
     <mat-form-field>

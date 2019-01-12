@@ -63,6 +63,21 @@ export class ApiService {
     );
   }
 
+  getTeams() {
+    const resource = 'teams';
+    const stream = this.getStreamSource(resource);
+
+    const result = this.http.get(this.hostAddress + resource)
+      .subscribe(val => {
+        console.log(val);
+        stream.next(Object.freeze(val));
+      });
+
+    return (stream.asObservable() as Observable<Readonly<ApiObject[]>>).pipe(
+      filter(data => data !== undefined)
+    );
+  }
+
   postTeam(teamName: string): Observable<ApiObject> {
     return this.http.post(this.hostAddress + 'teams', { 'teamname': teamName });
   }
