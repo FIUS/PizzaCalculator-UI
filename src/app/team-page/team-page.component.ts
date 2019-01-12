@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { ApiService } from '../api/api.service';
 
 @Component({
   selector: 'app-team-page',
@@ -9,9 +10,10 @@ import { Subscription } from 'rxjs';
 })
 export class TeamPageComponent implements OnInit, OnDestroy {
 
-  constructor(private route: ActivatedRoute, ) { }
+  constructor(private route: ActivatedRoute, private apiService: ApiService) { }
 
   subParam: Subscription;
+  subIngredients: Subscription;
 
   teamName: string;
 
@@ -19,11 +21,20 @@ export class TeamPageComponent implements OnInit, OnDestroy {
     this.subParam = this.route.params.subscribe(params => {
       this.teamName = params['teamName'];
     });
+
+    this.subIngredients = this.apiService.getIngredients().subscribe(val => {
+      console.log(val);
+    });
   }
 
   ngOnDestroy() {
-    if (this.subParam != null) {
-      this.subParam.unsubscribe();
+    this.unsubscribe(this.subParam);
+    this.unsubscribe(this.subIngredients);
+  }
+
+  unsubscribe(subscription: Subscription) {
+    if (subscription != null) {
+      subscription.unsubscribe();
     }
   }
 
