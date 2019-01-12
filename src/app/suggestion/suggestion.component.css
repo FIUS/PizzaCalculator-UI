@@ -1,0 +1,12 @@
+mat-card {
+  margin: 5px;
+  font-size: xx-large;
+}
+
+mat-card > mat-card-content {
+  font-size: large;
+}
+
+mat-card > mat-card-actions > div > button {
+  background-color: lawngreen;
+}
