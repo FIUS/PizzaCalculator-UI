@@ -1,9 +1,8 @@
-.suggest {
-
-}
-
 .suggest > button {
   display: table;
   margin: 0 auto;
 }
 
+.counter {
+  margin: 1em;
+}
