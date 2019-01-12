@@ -27,7 +27,6 @@ export class TeamPageComponent implements OnInit, OnDestroy {
   selectedOptions: any;
 
   onNgModelChange(e) {
-    console.log(e);
   }
 
   send() {
@@ -35,6 +34,7 @@ export class TeamPageComponent implements OnInit, OnDestroy {
       if (this.selectedOptions.length <= 4) {
         // valid sugggestion
         this.apiService.postPizza(this.selectedOptions, this.teamName).subscribe(val => {
+          this.apiService.getPizzas(this.teamName);
         });
       } else {
         // error message

@@ -2,16 +2,16 @@
   <div>Admin-Page for Team: {{teamName}}</div>
 </div>
 <div class="input">
+  <!-- Number of Things -->
   <mat-form-field>
-    <input matInput>
+    <input matInput type="number" [(value)]="numberOfThings" (change)="numberValueChanged()">
   </mat-form-field>
+
+  <!-- Selector -->
   <mat-form-field>
     <mat-select [(value)]="selectedOption">
-      <mat-option [value]="option">
-        Personen
-      </mat-option>
-      <mat-option [value]="option">
-        Pizzastücke
+      <mat-option *ngFor="let option of optionsToChoose " [value]="option">
+        {{option}}
       </mat-option>
     </mat-select>
   </mat-form-field>
