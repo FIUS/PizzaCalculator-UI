@@ -15,11 +15,13 @@
 
     <!-- Vegetarien -->
     <div>
-      <mat-form-field>
-        <input matInput type="number" [(ngModel)]="vegetarian" (change)="numberValueChanged()">
-      </mat-form-field>
-      <div class="text">
-        Anzahl Vegetarier
+      <div class="separators">
+        <mat-form-field>
+          <input matInput type="number" [(ngModel)]="vegetarian" (change)="numberValueChanged()">
+        </mat-form-field>
+        <div class="text">
+          Anzahl Vegetarier
+        </div>
       </div>
 
       <!-- Selector -->
