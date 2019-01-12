@@ -3,24 +3,17 @@
     Header
   </mat-card-header>
   <mat-card-content>
-    <div>
-      Maultaschen
-    </div>
-    <div>
-      Maultaschen
-    </div>
-    <div>
-      Maultaschen
-    </div>
-    <div>
-      Maultaschen
-    </div>
+    <ng-container *ngFor="let element of ingredients">
+      <div>
+        {{element}}
+      </div>
+    </ng-container>
   </mat-card-content>
   <mat-card-actions>
     <div class="inline-flex">
-      <button mat-raised-button>Vote up!</button>
+      <button mat-raised-button (click)="voteUp()">Vote up!</button>
       <mat-chip-list class="pa2">
-        <mat-chip style="color: white; background-color: black;" [disabled]="true">6</mat-chip>
+        <mat-chip style="color: white; background-color: black;" [disabled]="true">{{votes}}</mat-chip>
       </mat-chip-list>
     </div>
   </mat-card-actions>

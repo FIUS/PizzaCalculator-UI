@@ -7,9 +7,15 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class SuggestionComponent implements OnInit {
 
-  @Input() suggestion: any;
+  @Input() name: string;
+  @Input() ingredients: string[];
+  @Input() votes: number;
 
   constructor() { }
+
+  voteUp() {
+    //TODO: Implement the upvote and increment the votes: number.
+  }
 
   ngOnInit() {
   }
