@@ -3,12 +3,14 @@
 
   <ng-container *ngFor="let template of templates">
     <mat-card class="pa2 ma1">
-      <b>{{template.name}}</b><br />
+      <b>{{template.name}}</b><br/>
       <span *ngFor="let ingredient of template.ingredients" class="pa1">
         {{ingredient}}
       </span>
-      <br />
-      <button mat-raised-button mat-dialog-close class="pa1" (click)="select(template)">auswählen</button>
+      <br/>
+      <div>
+        <button mat-raised-button mat-dialog-close class="pa1" (click)="select(template)">auswählen</button>
+      </div>
     </mat-card>
   </ng-container>
 

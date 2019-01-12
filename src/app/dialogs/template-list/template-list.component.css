@@ -1,0 +1,9 @@
+mat-dialog-content {
+  width: 30em;
+}
+
+mat-card > div > button {
+  margin-top: 5px;
+  position: relative;
+  left: 75%;
+}
