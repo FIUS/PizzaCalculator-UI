@@ -4,6 +4,7 @@ import { ApiService } from '../api/api.service';
 import { ErrorMessageComponent } from '../dialogs/error-message/error-message.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
+import { TemplateListComponent } from '../dialogs/template-list/template-list.component';
 
 @Component({
   selector: 'app-ingredient-list',
@@ -41,7 +42,7 @@ export class IngredientListComponent implements OnInit, OnDestroy {
   }
 
   openTemplates(): void {
-
+    const dialogRef = this.dialog.open(TemplateListComponent);
   }
 
   ngOnInit() {

@@ -1,0 +1,18 @@
+<mat-dialog-content>
+  <h3>Vorlagen</h3>
+
+  <ng-container *ngFor="let template of templates">
+    <mat-card class="pa2 ma1">
+      <b>{{template.name}}</b><br />
+      <span *ngFor="let ingredient of template.ingredients" class="pa1">
+        {{ingredient}}
+      </span>
+      <br />
+      <button mat-raised-button mat-dialog-close class="pa1" (click)="select(template)">auswählen</button>
+    </mat-card>
+  </ng-container>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>cancel</button>
+</mat-dialog-actions>

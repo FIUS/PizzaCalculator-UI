@@ -63,6 +63,10 @@ export class ApiService {
     );
   }
 
+  postTemplates(template, teamName) {
+    // TODO
+  }
+
   getTeams() {
     const resource = 'teams';
     const stream = this.getStreamSource(resource);

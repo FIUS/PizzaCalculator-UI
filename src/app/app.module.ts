@@ -22,6 +22,7 @@ import { SuggestionComponent } from './suggestion/suggestion.component';
 import { ErrorMessageComponent } from './dialogs/error-message/error-message.component';
 import { SuggestionListComponent } from './suggestion-list/suggestion-list.component';
 import { IngredientListComponent } from './ingredient-list/ingredient-list.component';
+import { TemplateListComponent } from './dialogs/template-list/template-list.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { IngredientListComponent } from './ingredient-list/ingredient-list.compo
     SuggestionComponent,
     ErrorMessageComponent,
     SuggestionListComponent,
-    IngredientListComponent
+    IngredientListComponent,
+    TemplateListComponent
   ],
   imports: [
     BrowserModule,
@@ -67,6 +69,7 @@ import { IngredientListComponent } from './ingredient-list/ingredient-list.compo
   entryComponents: [
     // dialogs
     ErrorMessageComponent,
+    TemplateListComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
