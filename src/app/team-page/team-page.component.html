@@ -1,2 +1,14 @@
-<h3>{{teamName}}</h3>
-test
+<div class="title">
+  <div>Team: {{teamName}}</div>
+</div>
+<div class="content">
+  <div class="vote flex flex-wrap">
+    <ng-container *ngFor="let element of ingredients">
+      <!-- TODO Replace ingredients with array of pizza suggestions. -->
+      <app-suggestion [suggestion]="element"></app-suggestion>
+    </ng-container>
+  </div>
+  <div class="suggest">
+    Vorlagen
+  </div>
+</div>
