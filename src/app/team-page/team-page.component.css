@@ -18,8 +18,14 @@
 
 .vote {
   width: 66%;
+  border-right: 1px solid rgba(0,0,0,.42);
 }
 
 .suggest {
   width: 34%;
+}
+
+.suggest > button {
+  display: table;
+  margin: 0 auto;
 }
