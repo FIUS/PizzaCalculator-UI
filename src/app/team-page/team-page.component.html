@@ -2,20 +2,25 @@
   <div>Team: {{teamName}}</div>
 </div>
 <div class="content">
+
+  <!-- Pizzas -->
   <div class="vote flex flex-wrap">
     <ng-container *ngFor="let element of ingredients">
       <!-- TODO Replace ingredients with array of pizza suggestions. -->
       <app-suggestion [name]="element" votes="3" [ingredients]="typesOfShoes"></app-suggestion>
     </ng-container>
   </div>
+
+  <!-- Ingredients -->
   <div class="suggest pa2">
     <div style="height: 10px"></div>
     <button mat-raised-button (click)="openDialog()">Vorlagen</button>
     <div style="height: 40px"></div>
     <button mat-raised-button (click)="openDialog()">Vorschlag absenden</button>
     <mat-selection-list>
-      <mat-list-option *ngFor="let shoe of ingredients">
-        {{shoe}}
+      <mat-list-option *ngFor="let ingredient of ingredients">
+        {{ingredient.name}}
       </mat-list-option>
-    </mat-selection-list>  </div>
+    </mat-selection-list>
+  </div>
 </div>
