@@ -8,7 +8,14 @@
       <app-suggestion [suggestion]="element"></app-suggestion>
     </ng-container>
   </div>
-  <div class="suggest">
-    Vorlagen
-  </div>
+  <div class="suggest pa2">
+    <div style="height: 10px"></div>
+    <button mat-raised-button (click)="openDialog()">Vorlagen</button>
+    <div style="height: 40px"></div>
+    <button mat-raised-button (click)="openDialog()">Vorschlag absenden</button>
+    <mat-selection-list>
+      <mat-list-option *ngFor="let shoe of typesOfShoes">
+        {{shoe}}
+      </mat-list-option>
+    </mat-selection-list>  </div>
 </div>

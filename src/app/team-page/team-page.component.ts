@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ApiService } from '../api/api.service';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
   selector: 'app-team-page',
@@ -19,6 +20,12 @@ export class TeamPageComponent implements OnInit, OnDestroy {
   teamName: string;
 
   ingredients: any;
+
+  typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
+
+  openDialog(): void {
+
+  }
 
   ngOnInit() {
     this.subParam = this.route.params.subscribe(params => {
