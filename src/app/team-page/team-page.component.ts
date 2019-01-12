@@ -10,7 +10,7 @@ import { ApiService } from '../api/api.service';
 })
 export class TeamPageComponent implements OnInit, OnDestroy {
 
-  constructor(private route: ActivatedRoute, ) { }
+  constructor(private apiService: ApiService, private route: ActivatedRoute, ) { }
 
   subParam: Subscription;
   subIngredients: Subscription;
@@ -22,11 +22,11 @@ export class TeamPageComponent implements OnInit, OnDestroy {
       this.teamName = params['teamName'];
     });
 
-    /*
+
     this.subIngredients = this.apiService.getIngredients().subscribe(val => {
       console.log(val);
     });
-    */
+
   }
 
   ngOnDestroy() {
