@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { ApiService } from 'src/app/api/api.service';
 
 @Component({
   selector: 'app-order-view',
@@ -8,10 +9,21 @@ import { MatDialogRef } from '@angular/material';
 })
 export class OrderViewComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<OrderViewComponent>) { }
+  order;
+  teamName: string;
+
+  constructor(
+    private apiService: ApiService,
+    public dialogRef: MatDialogRef<OrderViewComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.teamName = data.teamName;
+  }
 
   ngOnInit() {
-    // TODO continue when selected endpoint is present
+
+    this.apiService.getOrder(this.teamName).subscribe(val => {
+      this.order = val;
+    });
   }
 
 }

@@ -37,7 +37,7 @@ export class AdminPageComponent implements OnInit, OnDestroy {
   }
 
   showOrderPreview() {
-    const dialogRef = this.dialog.open(OrderViewComponent);
+    const dialogRef = this.dialog.open(OrderViewComponent, { data: { teamName: this.teamName } });
   }
 
   ngOnInit() {

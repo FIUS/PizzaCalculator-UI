@@ -106,5 +106,22 @@ export class ApiService {
   postPizza(ingredients, teamName) {
     return this.http.post(this.hostAddress + 'pizzas', { 'teamname': teamName, 'ingredients': ingredients });
   }
+
+  getOrder(teamName) {
+    const resource = 'pizzas/order';
+    const stream = this.getStreamSource(resource);
+
+
+    const params = new HttpParams().set('teamname', teamName);
+
+    const result = this.http.get(this.hostAddress + resource, { 'params': params })
+      .subscribe(val => {
+        stream.next(Object.freeze(val));
+      });
+
+    return (stream.asObservable() as Observable<Readonly<ApiObject[]>>).pipe(
+      filter(data => data !== undefined)
+    );
+  }
 }
 
