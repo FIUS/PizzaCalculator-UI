@@ -8,12 +8,12 @@
         <mat-option value="Go to Team">Go to Team</mat-option>
       </mat-select>
     </mat-form-field>
-    <button mat-raised-button>Go to team page</button>
+    <button mat-raised-button [routerLink]="['/team','myTeam']">Go to team page</button>
   </div>
   <div class="create">
     <mat-form-field>
-      <input matInput placeholder="Create Team">
+      <input matInput [(ngModel)]="teamTypingInput">
     </mat-form-field>
-    <button mat-raised-button>Create Team</button>
+    <button mat-raised-button (click)=createTeam()>Create Team</button>
   </div>
 </div>
