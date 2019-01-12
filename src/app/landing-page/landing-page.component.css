@@ -10,7 +10,6 @@
   transform: perspective(1px) translateY(-50%);
   text-align: center;
   font-size: 5em;
-  font-family: 'Roboto', sans-serif;
 }
 
 .interactive {
