@@ -11,7 +11,3 @@ mat-card > mat-card-content {
   font-size: large;
   height: 4em;
 }
-
-mat-card > mat-card-actions > div > button {
-  background-color: #04d9c4;
-}

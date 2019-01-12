@@ -1,5 +1,5 @@
 <div class="flex flex-wrap">
   <ng-container *ngFor="let element of pizzas">
-    <app-suggestion class="flex" [name]="element.name" votes="3" [ingredients]="element.ingredients"></app-suggestion>
+    <app-suggestion class="flex" [name]="element.name" votes="3" [ingredients]="element.ingredients" [isAdmin]="isAdmin"></app-suggestion>
   </ng-container>
 </div>

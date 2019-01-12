@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Component, OnInit, OnDestroy, Input} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ApiService } from '../api/api.service';
 import { ActivatedRoute } from '@angular/router';
@@ -9,6 +9,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./suggestion-list.component.css']
 })
 export class SuggestionListComponent implements OnInit, OnDestroy {
+
+  @Input() isAdmin: boolean;
 
   subParam: Subscription;
   subPizzas: Subscription;

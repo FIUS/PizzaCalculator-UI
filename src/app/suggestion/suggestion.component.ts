@@ -10,6 +10,7 @@ export class SuggestionComponent implements OnChanges {
   @Input() name: string;
   @Input() ingredients: string[];
   @Input() votes: number;
+  @Input() isAdmin: boolean;
 
   constructor() { }
 
