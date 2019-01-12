@@ -3,21 +3,40 @@
 </div>
 <div class="input">
   <!-- Number of Things -->
-  <mat-form-field>
-    <input matInput type="number" [(value)]="numberOfThings" (change)="numberValueChanged()">
-  </mat-form-field>
+  <div>
+    <mat-form-field>
+      <input matInput type="number" [(ngModel)]="numberOfThings" (change)="numberValueChanged()">
+    </mat-form-field>
 
-  <!-- Selector -->
-  <mat-form-field>
-    <mat-select [(value)]="selectedOption">
-      <mat-option *ngFor="let option of optionsToChoose " [value]="option">
-        {{option}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+    <!-- Selector -->
+    <mat-form-field>
+      <mat-select [(ngModel)]="selectedOption">
+        <mat-option *ngFor="let option of optionsToChoose " [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <!-- Vegetarien -->
+  <div>
+    <mat-form-field>
+      <input matInput type="number" [(ngModel)]="vegetarian" (change)="numberValueChanged()">
+    </mat-form-field>
+  </div>
+
+  <!-- Pork -->
+  <div>
+    <mat-form-field>
+      <input matInput type="number" [(ngModel)]="pork" (change)="numberValueChanged()">
+    </mat-form-field>
+  </div>
+
+
 </div>
 <div class="preview">
   <button mat-raised-button (click)="showOrderPreview">Bestellansicht</button>
 </div>
 
+<mat-divider></mat-divider>
 <app-suggestion-list></app-suggestion-list>

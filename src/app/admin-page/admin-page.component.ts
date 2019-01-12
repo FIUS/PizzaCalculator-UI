@@ -9,18 +9,28 @@ import { Subscription } from 'rxjs';
 })
 export class AdminPageComponent implements OnInit, OnDestroy {
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute) {
+    this.numberOfThings = 1;
+  }
 
   teamName: string;
   subParam: Subscription;
 
-  numberOfThings = 1;
   optionsToChoose = ['Personen', 'Stücke'];
   selectedOption = this.optionsToChoose[0];
+  numberOfThings;
+  vegetarian = 0;
+  pork = 0;
 
   numberValueChanged() {
     if (this.numberOfThings < 0) {
       this.numberOfThings = 0;
+    }
+    if (this.vegetarian < 0) {
+      this.vegetarian = 0;
+    }
+    if (this.pork < 0) {
+      this.pork = 0;
     }
   }
 
