@@ -204,5 +204,10 @@ export class ApiService {
       return this.http.patch(this.hostAddress + 'pizzas/' + name, { 'teamname': teamName }, options);
     }
   }
+
+  public getHostAddress() {
+    return this.hostAddress;
+  }
+
 }
 

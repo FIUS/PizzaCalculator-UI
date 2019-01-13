@@ -74,4 +74,19 @@ export class AdminPageComponent implements OnInit, OnDestroy {
     });
   }
 
+  copyToClipBoard() {
+    const text = this.apiService.getHostAddress() + 'teams/' + this.teamName;
+    /*
+    text.select();
+    document.execCommand('copy');
+    inputElement.setSelectionRange(0, 0);
+    */
+
+    document.addEventListener('copy', (e: ClipboardEvent) => {
+      e.clipboardData.setData('text/plain', (text));
+      e.preventDefault();
+      document.removeEventListener('copy', null);
+    });
+    document.execCommand('copy');
+  }
 }
