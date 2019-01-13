@@ -2,20 +2,28 @@
   <div>Pizza Calculator V2.0</div>
 </div>
 <div class="interactive">
-  <div class="goto">
-    <mat-form-field>
-      <mat-select placeholder="Go to page for team" [(value)]="selectedTeam">
-        <mat-option *ngFor="let team of teams" [value]="team">
-          {{team}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <button mat-raised-button (click)="goToTeam()">Go to team page</button>
+  <div class="goto flex flex-wrap">
+    <div class="form-field">
+      <mat-form-field>
+        <mat-select placeholder="Go to page for team" [(value)]="selectedTeam">
+          <mat-option *ngFor="let team of teams" [value]="team">
+            {{team}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="button">
+      <button mat-raised-button (click)="goToTeam()">Go to team page</button>
+    </div>
   </div>
-  <div class="create">
-    <mat-form-field>
-      <input matInput [(ngModel)]="teamTypingInput">
-    </mat-form-field>
-    <button mat-raised-button (click)=createTeam()>Create Team</button>
+  <div class="create flex flex-wrap">
+    <div class="form-field">
+      <mat-form-field>
+        <input matInput [(ngModel)]="teamTypingInput">
+      </mat-form-field>
+    </div>
+    <div class="button">
+      <button mat-raised-button (click)=createTeam()>Create Team</button>
+    </div>
   </div>
 </div>

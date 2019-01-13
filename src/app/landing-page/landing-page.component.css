@@ -1,7 +1,7 @@
 .title {
   width: 100%;
   background-color: rgba(237, 237, 237, 0.61);
-  height: 200px;
+  height: 30vh;
 }
 
 .title > div {
@@ -9,42 +9,35 @@
   top: 50%;
   transform: perspective(1px) translateY(-50%);
   text-align: center;
-  font-size: 5em;
+  font-size: 8vw;
 }
 
 .interactive {
+  display: table;
+  margin: 0 auto;
+}
+
+.button, .form-field {
+  font-weight: bold;
+  font-size: x-large;
+  min-width: 20vw;
+  max-width: 80vw;
+  height: 100%;
+  position: relative;
+  top: 50%;
+  display: table;
+  margin: 10px auto;
+}
+
+button, mat-form-field {
   width: 100%;
-  height: 300px;
-}
-
-.goto {
-  height: 50%;
-  margin: 0 35%;
-  width: 30%;
-}
-
-.create {
-  height: 50%;
-  margin: 0 35%;
-  width: 30%;
+  display: block;
 }
 
 button {
-  height: 50%;
-  width: 40%;
-  margin: 0 5%;
-  position: relative;
-  top: 45%;
-  transform: perspective(1px) translateY(-50%);
+  height: 25%;
+  margin: 2vh 1vw 0;
   font-weight: bold;
   font-size: x-large;
-}
-
-mat-form-field {
-  font-weight: bold;
-  font-size: x-large;
-  width: 50%;
-  position: relative;
-  top: 50%;
-  transform: perspective(1px) translateY(-50%);
+  padding: 10px;
 }
