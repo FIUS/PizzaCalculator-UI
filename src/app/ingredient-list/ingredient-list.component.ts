@@ -28,10 +28,11 @@ export class IngredientListComponent implements OnInit, OnDestroy {
   send() {
     if (this.selectedOptions != null) {
       if (this.selectedOptions.length <= 4) {
+        console.log(this.selectedOptions);
         // valid sugggestion
         this.apiService.postPizza(this.selectedOptions, this.teamName).subscribe(val => {
           this.apiService.getPizzas(this.teamName);
-          console.log(val);
+          this.selectedOptions = [];
         });
       } else {
         // error message
