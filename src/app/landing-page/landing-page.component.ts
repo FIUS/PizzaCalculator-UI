@@ -21,6 +21,8 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subTeams = this.apiService.getTeams().subscribe(val => {
       this.teams = val;
+
+      this.apiService.getUuid();
     });
   }
 

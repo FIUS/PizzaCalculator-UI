@@ -1,8 +1,9 @@
 import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import {OrderViewComponent} from "../dialogs/order-view/order-view.component";
-import {MatDialog} from "@angular/material";
+import { OrderViewComponent } from '../dialogs/order-view/order-view.component';
+import { MatDialog } from '@angular/material';
+import { ApiService } from '../api/api.service';
 
 
 @Component({
@@ -12,7 +13,7 @@ import {MatDialog} from "@angular/material";
 })
 export class TeamPageComponent implements OnInit, OnDestroy {
 
-  constructor(private route: ActivatedRoute, private dialog: MatDialog) { }
+  constructor(private route: ActivatedRoute, private dialog: MatDialog, private apiService: ApiService) { }
 
   subParam: Subscription;
 
@@ -21,6 +22,8 @@ export class TeamPageComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subParam = this.route.params.subscribe(params => {
       this.teamName = params['teamName'];
+
+      this.apiService.getUuid();
     });
 
   }

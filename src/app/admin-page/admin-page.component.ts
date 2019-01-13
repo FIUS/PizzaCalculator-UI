@@ -62,6 +62,8 @@ export class AdminPageComponent implements OnInit, OnDestroy {
       this.teamName = params['teamName'];
       this.token = params['hash'];
 
+      this.apiService.getUuid();
+
       this.subVoteMode = this.apiService.getVoteMode(this.teamName).subscribe(val => {
 
         this.modesToSelect.forEach(element => {

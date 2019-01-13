@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, } from '@angular/common/http';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { filter, flatMap } from 'rxjs/operators';
 
 import { ApiObject } from './apiobject';
 
@@ -33,6 +33,24 @@ export class ApiService {
       }
     }
     return stream;
+  }
+
+  getUuid() {
+
+    const resource = 'uuid';
+
+    const localUuid = localStorage.getItem('pizzaCalculatorUuid');
+    if (localUuid == null) {
+      this.http.post(this.hostAddress + resource, {}).subscribe(val => {
+        localStorage.setItem('pizzaCalculatorUuid', JSON.parse(JSON.stringify(val)).uuid);
+        return val;
+      });
+
+    } else {
+      return localUuid;
+    }
+
+
   }
 
   // ===========
