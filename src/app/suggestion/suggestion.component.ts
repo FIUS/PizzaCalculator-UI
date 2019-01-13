@@ -118,7 +118,9 @@ export class SuggestionComponent implements OnInit, OnDestroy, OnChanges {
 
 
   sendRequired() {
-
+    this.apiService.postRequiredPieces(this.name, this.teamName, this.requiredPieces).subscribe(val => {
+      console.log(val);
+    });
   }
 
 }

@@ -310,6 +310,7 @@ export class ApiService {
 
   postRequiredPieces(pizzaName, teamName, numberOfPieces) {
 
+
     let uuid = this.getUuid();
 
     while (uuid == null) {
@@ -322,12 +323,12 @@ export class ApiService {
       { 'teamname': teamName, 'uuid': uuid, 'pieces': numberOfPieces });
   }
 
-  public getHostAddress() {
-    return this.hostAddress;
-  }
-
   getRequiredPieces(pizzaName, teamName) {
     // TODO implement
+  }
+
+  public getHostAddress() {
+    return this.hostAddress;
   }
 
 }

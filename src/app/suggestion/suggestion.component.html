@@ -30,7 +30,7 @@
 
     <div *ngIf="voteMode=='registration'">
       <mat-form-field>
-        <input matInput [(ngModel)]="requiredPieces" style="max-width: 1rem; ">
+        <input matInput [(ngModel)]="requiredPieces">
       </mat-form-field>
 
       <button color="primary" mat-raised-button (click)="sendRequired()">sumbit</button>
