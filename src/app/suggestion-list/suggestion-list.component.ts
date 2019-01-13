@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 export class SuggestionListComponent implements OnInit, OnDestroy {
 
   @Input() isAdmin: boolean;
-  @Input() token: string = '';
+  @Input() token = '';
 
   subParam: Subscription;
   subPizzas: Subscription;

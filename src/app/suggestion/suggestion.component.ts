@@ -23,19 +23,21 @@ export class SuggestionComponent implements OnInit, OnDestroy, OnChanges {
 
   teamName: string;
 
+  seperator = '/#$';
+
   constructor(private route: ActivatedRoute, private apiService: ApiService) {
   }
 
   voteUp() {
 
-    const currentState = localStorage.getItem(this.name);
+    const currentState = localStorage.getItem(this.teamName + this.seperator + this.name);
 
     if (currentState == null || currentState !== 'up') {
       // call upvote
       const sub = this.apiService.vote(this.name, this.teamName, true).subscribe(val => {
 
         sub.unsubscribe();
-        localStorage.setItem(this.name, 'up');
+        localStorage.setItem(this.teamName + this.seperator + this.name, 'up');
         this.voted = true;
 
         this.apiService.getPizzaVote(this.name, this.teamName);
@@ -44,14 +46,14 @@ export class SuggestionComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   voteDown() {
-    const currentState = localStorage.getItem(this.name);
+    const currentState = localStorage.getItem(this.teamName + this.seperator + this.name);
 
     if (this.voted === true && currentState === 'up') {
       // call down vote
       const sub = this.apiService.vote(this.name, this.teamName, false).subscribe(val => {
 
         sub.unsubscribe();
-        localStorage.setItem(this.name, 'none');
+        localStorage.setItem(this.teamName + this.seperator + this.name, 'none');
         this.voted = false;
 
         this.apiService.getPizzaVote(this.name, this.teamName);
@@ -65,7 +67,7 @@ export class SuggestionComponent implements OnInit, OnDestroy, OnChanges {
 
       console.log(val);
       sub.unsubscribe();
-      localStorage.setItem(this.name, 'none');
+      localStorage.setItem(this.teamName + this.seperator + this.name, 'none');
 
       this.apiService.getPizzas(this.teamName);
     });
@@ -93,7 +95,7 @@ export class SuggestionComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnChanges() {
     if (this.name != null) {
-      this.voted = localStorage.getItem(this.name) === 'up';
+      this.voted = localStorage.getItem(this.teamName + this.seperator + this.name) === 'up';
     }
   }
 
