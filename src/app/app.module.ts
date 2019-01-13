@@ -39,7 +39,7 @@ import { OrderViewComponent } from './dialogs/order-view/order-view.component';
     SuggestionListComponent,
     IngredientListComponent,
     TemplateListComponent,
-    OrderViewComponent
+    OrderViewComponent,
   ],
   imports: [
     BrowserModule,

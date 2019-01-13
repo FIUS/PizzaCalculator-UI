@@ -57,7 +57,17 @@
 
 </div>
 <div class="preview">
-  <button mat-raised-button (click)="showOrderPreview()">Bestellansicht</button>
+  <mat-slide-toggle [(ngModel)]="freeze">Einfrieren</mat-slide-toggle>
+
+  <button mat-raised-button class="ma2 pr2" (click)="showOrderPreview()">Bestellansicht</button>
+
+  <mat-form-field class="ma2 pl2">
+    <mat-select [(ngModel)]="selectedMode">
+      <mat-option *ngFor="let mode of modesToSelect " [value]="mode">
+        {{mode.display}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>
 
 <mat-divider class="pa2"></mat-divider>

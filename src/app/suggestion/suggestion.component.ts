@@ -77,9 +77,7 @@ export class SuggestionComponent implements OnInit, OnDestroy, OnChanges {
     this.subParam = this.route.params.subscribe(params => {
       this.teamName = params['teamName'];
 
-      console.log('Create vote subscription');
       this.subVote = this.apiService.getPizzaVote(this.name, this.teamName).subscribe(val => {
-        console.log(val);
         this.votes = JSON.parse(JSON.stringify(val)).vote;
       });
     });

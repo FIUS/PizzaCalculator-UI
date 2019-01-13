@@ -5,6 +5,11 @@ import { OrderViewComponent } from '../dialogs/order-view/order-view.component';
 import { MatDialog } from '@angular/material';
 import { ApiService } from '../api/api.service';
 
+export interface VoteMode {
+  display: string;
+  name: string;
+}
+
 @Component({
   selector: 'app-admin-page',
   templateUrl: './admin-page.component.html',
@@ -19,12 +24,22 @@ export class AdminPageComponent implements OnInit, OnDestroy {
   token: string;
 
   subParam: Subscription;
+  subVoteMode: Subscription;
+  subFreeze: Subscription;
+  subSize: Subscription;
+  subVegetarian: Subscription;
+  subPork: Subscription;
+  subType: Subscription;
 
   optionsToChoose = ['Personen', 'Stücke'];
   selectedOption = this.optionsToChoose[0];
   numberOfThings = 1;
   vegetarian = 0;
   pork = 0;
+
+  freeze;
+  selectedMode;
+  modesToSelect: VoteMode[] = [{ display: 'normal', name: 'std' }, { display: 'registrierung', name: 'registration' }];
 
   numberValueChanged() {
     if (this.numberOfThings < 0) {
@@ -46,10 +61,46 @@ export class AdminPageComponent implements OnInit, OnDestroy {
     this.subParam = this.route.params.subscribe(params => {
       this.teamName = params['teamName'];
       this.token = params['hash'];
+
+      this.subVoteMode = this.apiService.getVoteMode(this.teamName).subscribe(val => {
+
+        this.modesToSelect.forEach(element => {
+          if (val.voteMode === element.name) {
+            this.selectedMode = element;
+            return;
+          }
+        });
+      });
+
+      this.subFreeze = this.apiService.getFreeze(this.teamName).subscribe(val => {
+        this.freeze = val.freeze;
+      });
+
+      this.subSize = this.apiService.getSize(this.token).subscribe(val => {
+        console.log(val);
+        this.numberOfThings = val.registeredPieces;
+      });
+
+      this.subType = this.apiService.getType(this.token).subscribe(val => {
+        console.log(val);
+        this.selectedOption = val.type;
+      });
+
+      this.subVegetarian = this.apiService.getVegetarian(this.token).subscribe(val => {
+        this.vegetarian = val.vegetarian;
+      });
+
+      this.subPork = this.apiService.getPork(this.token).subscribe(val => {
+        this.pork = val.noPork;
+      });
     });
   }
 
   ngOnDestroy() {
+    this.unsubscribe(this.subParam);
+    this.unsubscribe(this.subVoteMode);
+    this.unsubscribe(this.subFreeze);
+    this.unsubscribe(this.subVegetarian);
     this.unsubscribe(this.subParam);
   }
 
@@ -72,15 +123,16 @@ export class AdminPageComponent implements OnInit, OnDestroy {
     const subPork = this.apiService.patchPork(this.token, this.pork).subscribe(val => {
       subPork.unsubscribe();
     });
+    const subMode = this.apiService.patchVoteMode(this.token, this.selectedMode).subscribe(val => {
+      subMode.unsubscribe();
+    });
+    const subFr = this.apiService.patchFreeze(this.token, this.freeze).subscribe(val => {
+      subFr.unsubscribe();
+    });
   }
 
   copyToClipBoard() {
     const text = this.apiService.getHostAddress() + 'teams/' + this.teamName;
-    /*
-    text.select();
-    document.execCommand('copy');
-    inputElement.setSelectionRange(0, 0);
-    */
 
     document.addEventListener('copy', (e: ClipboardEvent) => {
       e.clipboardData.setData('text/plain', (text));

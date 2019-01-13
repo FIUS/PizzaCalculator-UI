@@ -97,9 +97,37 @@ export class ApiService {
     return this.http.post(this.hostAddress + 'teams', { 'teamname': teamName });
   }
 
+  getSize(token: string) {
+    const resource = 'teams/' + token + '/size';
+    const stream = this.getStreamSource(resource);
+
+    const result = this.http.get(this.hostAddress + resource)
+      .subscribe(val => {
+        stream.next(Object.freeze(val));
+      });
+
+    return (stream.asObservable() as Observable<Readonly<ApiObject>>).pipe(
+      filter(data => data !== undefined)
+    );
+  }
+
   patchSize(teamName: string, size: number) {
 
     return this.http.patch(this.hostAddress + 'teams/' + teamName + '/size', { 'size': size });
+  }
+
+  getType(token: string) {
+    const resource = 'teams/' + token + '/size/type';
+    const stream = this.getStreamSource(resource);
+
+    const result = this.http.get(this.hostAddress + resource)
+      .subscribe(val => {
+        stream.next(Object.freeze(val));
+      });
+
+    return (stream.asObservable() as Observable<Readonly<ApiObject>>).pipe(
+      filter(data => data !== undefined)
+    );
   }
 
   patchType(teamName: string, type: string) {
@@ -115,14 +143,78 @@ export class ApiService {
     return this.http.patch(this.hostAddress + 'teams/' + teamName + '/size/type', { 'type': mappedType });
   }
 
+  getVegetarian(token: string) {
+    const resource = 'teams/' + token + '/vegetarian';
+    const stream = this.getStreamSource(resource);
+
+    const result = this.http.get(this.hostAddress + resource)
+      .subscribe(val => {
+        stream.next(Object.freeze(val));
+      });
+
+    return (stream.asObservable() as Observable<Readonly<ApiObject>>).pipe(
+      filter(data => data !== undefined)
+    );
+  }
+
   patchVegetarian(teamName: string, size: number) {
 
-    return this.http.patch(this.hostAddress + 'teams/' + teamName + '/vegetarian', { 'size': size });
+    return this.http.patch(this.hostAddress + 'teams/' + teamName + '/vegetarian', { 'vegetarian': size });
+  }
+
+  getPork(token: string) {
+    const resource = 'teams/' + token + '/no-pork';
+    const stream = this.getStreamSource(resource);
+
+    const result = this.http.get(this.hostAddress + resource)
+      .subscribe(val => {
+        stream.next(Object.freeze(val));
+      });
+
+    return (stream.asObservable() as Observable<Readonly<ApiObject>>).pipe(
+      filter(data => data !== undefined)
+    );
   }
 
   patchPork(teamName: string, size: number) {
 
-    return this.http.patch(this.hostAddress + 'teams/' + teamName + '/no-pork', { 'size': size });
+    return this.http.patch(this.hostAddress + 'teams/' + teamName + '/no-pork', { 'noPork': size });
+  }
+
+  getVoteMode(teamName) {
+    const resource = 'teams/' + teamName + '/vote-mode';
+    const stream = this.getStreamSource(resource);
+
+    const result = this.http.get(this.hostAddress + resource)
+      .subscribe(val => {
+        stream.next(Object.freeze(val));
+      });
+
+    return (stream.asObservable() as Observable<Readonly<ApiObject>>).pipe(
+      filter(data => data !== undefined)
+    );
+  }
+
+  patchFreeze(token, freeze = true) {
+    return this.http.patch(this.hostAddress + 'teams/' + token + '/freeze', { 'freeze': freeze });
+  }
+
+  getFreeze(teamName) {
+    const resource = 'teams/' + teamName + '/freeze';
+    const stream = this.getStreamSource(resource);
+
+    const result = this.http.get(this.hostAddress + resource)
+      .subscribe(val => {
+        stream.next(Object.freeze(val));
+      });
+
+    return (stream.asObservable() as Observable<Readonly<ApiObject>>).pipe(
+      filter(data => data !== undefined)
+    );
+  }
+
+  patchVoteMode(token, voteMode) {
+    return this.http.patch(this.hostAddress + 'teams/' + token + '/vote-mode', { 'voteMode': voteMode.name });
   }
 
   // ======
@@ -166,7 +258,7 @@ export class ApiService {
         stream.next(Object.freeze(val));
       });
 
-    return (stream.asObservable() as Observable<Readonly<ApiObject[]>>).pipe(
+    return (stream.asObservable() as Observable<Readonly<ApiObject>>).pipe(
       filter(data => data !== undefined)
     );
   }
