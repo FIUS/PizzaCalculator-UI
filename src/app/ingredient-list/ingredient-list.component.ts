@@ -29,6 +29,7 @@ export class IngredientListComponent implements OnInit, OnDestroy {
         // valid sugggestion
         this.apiService.postPizza(this.selectedOptions, this.teamName).subscribe(val => {
           this.apiService.getPizzas(this.teamName);
+          console.log(val);
         });
       } else {
         // error message

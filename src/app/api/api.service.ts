@@ -152,7 +152,6 @@ export class ApiService {
 
   deletePizza(pizzaName: string, token: string) {
     const params = new HttpParams().set('teamname', token);
-    console.log(this.hostAddress + 'pizzas/' + pizzaName, { params: params });
     return this.http.delete(this.hostAddress + 'pizzas/' + pizzaName, { params: params });
   }
 
@@ -194,7 +193,6 @@ export class ApiService {
       // vote up
       const options = { params: new HttpParams().set('mode', 'up') };
 
-      console.log(options);
       return this.http.patch(this.hostAddress + 'pizzas/' + name, { 'teamname': teamName }, options);
 
     } else {
