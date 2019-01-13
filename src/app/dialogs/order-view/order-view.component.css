@@ -55,6 +55,10 @@ mat-dialog-content > div > div:first-child {
   transform: translateX(1px);
 }
 
+mat-dialog-actions button {
+  padding: 0.5em 1em;
+}
+
 * {
   font-weight: bold;
   font-size: x-large;

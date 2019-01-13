@@ -12,9 +12,9 @@
   <mat-card-actions>
     <div class="inline-flex">
 
-      <div *ngIf="voted; else up">
+      <ng-container *ngIf="voted; else up">
         <button color="secondary" mat-raised-button (click)="voteDown()">Undo</button>
-      </div>
+      </ng-container>
       <ng-template #up>
         <button color="primary" mat-raised-button (click)="voteUp()">Vote up!</button>
       </ng-template>
