@@ -12,6 +12,7 @@ export class SuggestionComponent implements OnInit, OnDestroy, OnChanges {
 
   subParam: Subscription;
   subVote: Subscription;
+  subVoteMode: Subscription;
 
   @Input() name: string;
   @Input() ingredients: string[];
@@ -20,6 +21,9 @@ export class SuggestionComponent implements OnInit, OnDestroy, OnChanges {
   @Input() token: string;
 
   voted;
+  voteMode;
+  requiredPieces;
+  totalPieces;
 
   teamName: string;
 
@@ -80,6 +84,16 @@ export class SuggestionComponent implements OnInit, OnDestroy, OnChanges {
       this.subVote = this.apiService.getPizzaVote(this.name, this.teamName).subscribe(val => {
         this.votes = JSON.parse(JSON.stringify(val)).vote;
       });
+
+      this.subVoteMode = this.apiService.getVoteMode(this.teamName).subscribe(val => {
+        this.voteMode = val.voteMode;
+
+        if (this.voteMode === 'registration') {
+          // TODO subscribe
+        }
+
+
+      });
     });
 
   }
@@ -91,12 +105,20 @@ export class SuggestionComponent implements OnInit, OnDestroy, OnChanges {
     if (this.subVote != null) {
       this.subVote.unsubscribe();
     }
+    if (this.subVoteMode != null) {
+      this.subVoteMode.unsubscribe();
+    }
   }
 
   ngOnChanges() {
     if (this.name != null) {
       this.voted = localStorage.getItem(this.teamName + this.seperator + this.name) === 'up';
     }
+  }
+
+
+  sendRequired() {
+
   }
 
 }

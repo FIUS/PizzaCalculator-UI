@@ -304,8 +304,30 @@ export class ApiService {
     }
   }
 
+  // =================
+  // REGISTRATION MODE
+  // =================
+
+  postRequiredPieces(pizzaName, teamName, numberOfPieces) {
+
+    let uuid = this.getUuid();
+
+    while (uuid == null) {
+      // wait until uuid is given
+      // todo insert sleep
+      uuid = this.getUuid();
+    }
+
+    return this.http.post(this.hostAddress + 'pizzas/' + pizzaName + '/pieces',
+      { 'teamname': teamName, 'uuid': uuid, 'pieces': numberOfPieces });
+  }
+
   public getHostAddress() {
     return this.hostAddress;
+  }
+
+  getRequiredPieces(pizzaName, teamName) {
+    // TODO implement
   }
 
 }

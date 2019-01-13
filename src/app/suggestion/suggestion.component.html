@@ -10,7 +10,8 @@
     </ng-container>
   </mat-card-content>
   <mat-card-actions>
-    <div class="inline-flex">
+
+    <div *ngIf="voteMode=='std'" class="inline-flex">
 
       <ng-container *ngIf="voted; else up">
         <button color="secondary" mat-raised-button (click)="voteDown()">Undo</button>
@@ -19,9 +20,6 @@
         <button color="primary" mat-raised-button (click)="voteUp()">Vote up!</button>
       </ng-template>
 
-
-
-
       <mat-chip-list class="pa2">
         <mat-chip style="color: white; background-color: black;" [disabled]="true">{{votes}}</mat-chip>
       </mat-chip-list>
@@ -29,5 +27,18 @@
         <button color="warn" mat-raised-button (click)="delete()">Delete!</button>
       </ng-container>
     </div>
+
+    <div *ngIf="voteMode=='registration'">
+      <mat-form-field>
+        <input matInput [(ngModel)]="requiredPieces" style="max-width: 1rem; ">
+      </mat-form-field>
+
+      <button color="primary" mat-raised-button (click)="sendRequired()">sumbit</button>
+
+      TEXT
+
+    </div>
+
+
   </mat-card-actions>
 </mat-card>
