@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { OrderViewComponent } from '../dialogs/order-view/order-view.component';
 import { MatDialog } from '@angular/material';
+import { ApiService } from '../api/api.service';
 
 @Component({
   selector: 'app-admin-page',
@@ -11,8 +12,7 @@ import { MatDialog } from '@angular/material';
 })
 export class AdminPageComponent implements OnInit, OnDestroy {
 
-  constructor(private route: ActivatedRoute, private dialog: MatDialog, ) {
-    this.numberOfThings = 1;
+  constructor(private route: ActivatedRoute, private dialog: MatDialog, private apiService: ApiService) {
   }
 
   teamName: string;
@@ -22,7 +22,7 @@ export class AdminPageComponent implements OnInit, OnDestroy {
 
   optionsToChoose = ['Personen', 'Stücke'];
   selectedOption = this.optionsToChoose[0];
-  numberOfThings;
+  numberOfThings = 1;
   vegetarian = 0;
   pork = 0;
 
@@ -57,6 +57,21 @@ export class AdminPageComponent implements OnInit, OnDestroy {
     if (subscription != null) {
       subscription.unsubscribe();
     }
+  }
+
+  save() {
+    const subSize = this.apiService.patchSize(this.token, this.numberOfThings).subscribe(val => {
+      subSize.unsubscribe();
+    });
+    const subType = this.apiService.patchType(this.token, this.selectedOption).subscribe(val => {
+      subType.unsubscribe();
+    });
+    const subVeg = this.apiService.patchVegetarian(this.token, this.vegetarian).subscribe(val => {
+      subVeg.unsubscribe();
+    });
+    const subPork = this.apiService.patchPork(this.token, this.pork).subscribe(val => {
+      subPork.unsubscribe();
+    });
   }
 
 }

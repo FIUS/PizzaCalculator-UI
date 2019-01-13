@@ -35,6 +35,9 @@ export class ApiService {
     return stream;
   }
 
+  // ===========
+  // INGREDIENTS
+  // ===========
 
   getIngredients() {
     const resource = 'ingredients';
@@ -51,6 +54,11 @@ export class ApiService {
     );
   }
 
+
+  // =========
+  // TEMPLATES
+  // =========
+
   getTemplates() {
     const resource = 'templates';
     const stream = this.getStreamSource(resource);
@@ -66,6 +74,10 @@ export class ApiService {
   postTemplates(template, teamName) {
     return this.http.post(this.hostAddress + 'pizzas/templates', { 'teamname': teamName, 'template': template });
   }
+
+  // =====
+  // TEAMS
+  // =====
 
   getTeams() {
     const resource = 'teams';
@@ -85,6 +97,37 @@ export class ApiService {
     return this.http.post(this.hostAddress + 'teams', { 'teamname': teamName });
   }
 
+  patchSize(teamName: string, size: number) {
+
+    return this.http.patch(this.hostAddress + 'teams/' + teamName + '/size', { 'size': size });
+  }
+
+  patchType(teamName: string, type: string) {
+
+    let mappedType = 'persons';
+
+    if (type === 'Personen') {
+      mappedType = 'persons';
+    } else if (type === 'Stücke') {
+      mappedType = 'pizzaPieces';
+    }
+
+    return this.http.patch(this.hostAddress + 'teams/' + teamName + '/size/type', { 'type': mappedType });
+  }
+
+  patchVegetarian(teamName: string, size: number) {
+
+    return this.http.patch(this.hostAddress + 'teams/' + teamName + '/vegetarian', { 'size': size });
+  }
+
+  patchPork(teamName: string, size: number) {
+
+    return this.http.patch(this.hostAddress + 'teams/' + teamName + '/no-pork', { 'size': size });
+  }
+
+  // ======
+  // PIZZAS
+  // ======
 
   getPizzas(teamName: string) {
     const resource = 'pizzas';
