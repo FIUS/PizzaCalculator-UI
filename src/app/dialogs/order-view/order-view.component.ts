@@ -40,6 +40,9 @@ export class OrderViewComponent implements OnInit {
     this.apiService.getOrder(this.teamName).subscribe(val => {
       this.order = val;
 
+      this.left = [];
+      this.right = [];
+
       let counter = 0;
       val.forEach(element => {
         if (counter % 2 === 0) {
