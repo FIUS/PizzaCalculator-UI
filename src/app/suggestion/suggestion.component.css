@@ -16,6 +16,10 @@ mat-card > mat-card-content > div {
   padding: 5px;
 }
 
+button {
+  width: 7em;
+}
+
 * {
   font-weight: bold;
 }
