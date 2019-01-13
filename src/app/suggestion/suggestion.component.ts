@@ -63,7 +63,6 @@ export class SuggestionComponent implements OnInit, OnDestroy, OnChanges {
       this.teamName = params['teamName'];
 
       this.subVote = this.apiService.getPizzaVote(this.name, this.teamName).subscribe(val => {
-        console.log(this.name, val);
         this.votes = JSON.parse(JSON.stringify(val)).vote;
       });
     });
