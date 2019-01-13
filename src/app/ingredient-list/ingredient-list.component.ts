@@ -15,9 +15,11 @@ export class IngredientListComponent implements OnInit, OnDestroy {
 
   subParam: Subscription;
   subIngredients: Subscription;
+  subFreeze: Subscription;
 
   teamName: string;
 
+  freeze: boolean;
   ingredients: any;
   selectedOptions: any;
 
@@ -50,6 +52,10 @@ export class IngredientListComponent implements OnInit, OnDestroy {
 
     this.subParam = this.route.params.subscribe(params => {
       this.teamName = params['teamName'];
+
+      this.subFreeze = this.apiService.getFreeze(this.teamName).subscribe(val => {
+        this.freeze = val.freeze;
+      });
     });
 
     this.subIngredients = this.apiService.getIngredients().subscribe(val => {
@@ -59,6 +65,8 @@ export class IngredientListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.unsubscribe(this.subIngredients);
+    this.unsubscribe(this.subParam);
+    this.unsubscribe(this.subFreeze);
   }
 
   unsubscribe(subscription: Subscription) {

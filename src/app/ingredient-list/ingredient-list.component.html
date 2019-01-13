@@ -1,10 +1,18 @@
 <div class="suggest pa2">
-  <div style="height: 10px"></div>
-  <button mat-raised-button (click)="openTemplates()">Vorlagen</button>
-  <div style="height: 40px"></div>
-  <button mat-raised-button [disabled]="ingredientSelection.selectedOptions.selected.length > 4" (click)="send()">
-    Vorschlag absenden
-  </button>
+
+  <div *ngIf="!freeze; else freezed">
+    <div style="height: 10px"></div>
+    <button mat-raised-button (click)="openTemplates()">Vorlagen</button>
+    <div style="height: 40px"></div>
+
+    <button mat-raised-button [disabled]="ingredientSelection.selectedOptions.selected.length > 4" (click)="send()">
+      Vorschlag absenden
+    </button>
+  </div>
+  <ng-template #freezed>
+    Der Admin hat das Hinzufügen weiterer Vorschläge deaktiviert.
+  </ng-template>
+
 
   <div class="pa2" style="margin-top: 1em">
     <mat-divider></mat-divider>
