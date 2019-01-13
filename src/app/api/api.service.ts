@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, } from '@angular/common/http';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
@@ -107,6 +107,22 @@ export class ApiService {
     return this.http.post(this.hostAddress + 'pizzas', { 'teamname': teamName, 'ingredients': ingredients });
   }
 
+  getPizzaVote(pizzaName, teamName) {
+    const resource = 'pizzas/' + pizzaName + '/vote';
+    const stream = this.getStreamSource(resource);
+
+    const params = new HttpParams().set('teamname', teamName);
+
+    const result = this.http.get(this.hostAddress + resource, { 'params': params })
+      .subscribe(val => {
+        stream.next(Object.freeze(val));
+      });
+
+    return (stream.asObservable() as Observable<Readonly<ApiObject[]>>).pipe(
+      filter(data => data !== undefined)
+    );
+  }
+
   getOrder(teamName) {
     const resource = 'pizzas/order';
     const stream = this.getStreamSource(resource);
@@ -122,6 +138,22 @@ export class ApiService {
     return (stream.asObservable() as Observable<Readonly<ApiObject[]>>).pipe(
       filter(data => data !== undefined)
     );
+  }
+
+  vote(name, teamName, upVote = true) {
+    if (upVote) {
+      // vote up
+      const options = { params: new HttpParams().set('mode', 'up') };
+
+      console.log(options);
+      return this.http.patch(this.hostAddress + 'pizzas/' + name, { 'teamname': teamName }, options);
+
+    } else {
+      // vote down
+      const options = { params: new HttpParams().set('mode', 'down') };
+
+      return this.http.patch(this.hostAddress + 'pizzas/' + name, { 'teamname': teamName }, options);
+    }
   }
 }
 

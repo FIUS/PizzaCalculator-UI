@@ -11,7 +11,17 @@
   </mat-card-content>
   <mat-card-actions>
     <div class="inline-flex">
-      <button color="primary" mat-raised-button (click)="voteUp()">Vote up!</button>
+
+      <div *ngIf="voted; else up">
+        <button color="secondary" mat-raised-button (click)="voteDown()">Undo</button>
+      </div>
+      <ng-template #up>
+        <button color="primary" mat-raised-button (click)="voteUp()">Vote up!</button>
+      </ng-template>
+
+
+
+
       <mat-chip-list class="pa2">
         <mat-chip style="color: white; background-color: black;" [disabled]="true">{{votes}}</mat-chip>
       </mat-chip-list>
