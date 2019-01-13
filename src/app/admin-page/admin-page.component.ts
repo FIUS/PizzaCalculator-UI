@@ -5,7 +5,7 @@ import { OrderViewComponent } from '../dialogs/order-view/order-view.component';
 import { MatDialog } from '@angular/material';
 import { ApiService } from '../api/api.service';
 
-export interface VoteMode {
+export interface SelectionItem {
   display: string;
   name: string;
 }
@@ -31,15 +31,15 @@ export class AdminPageComponent implements OnInit, OnDestroy {
   subPork: Subscription;
   subType: Subscription;
 
-  optionsToChoose = ['Personen', 'Stücke'];
-  selectedOption = this.optionsToChoose[0];
-  numberOfThings = 1;
-  vegetarian = 0;
-  pork = 0;
+  optionsToChoose: SelectionItem[] = [{ display: 'Personen', name: 'persons' }, { display: 'Stücke', name: 'pizzaPieces' }];
+  selectedOption;
+  numberOfThings;
+  vegetarian;
+  pork;
 
   freeze;
   selectedMode;
-  modesToSelect: VoteMode[] = [{ display: 'normal', name: 'std' }, { display: 'registrierung', name: 'registration' }];
+  modesToSelect: SelectionItem[] = [{ display: 'normal', name: 'std' }, { display: 'registrierung', name: 'registration' }];
 
   numberValueChanged() {
     if (this.numberOfThings < 0) {
@@ -77,13 +77,17 @@ export class AdminPageComponent implements OnInit, OnDestroy {
       });
 
       this.subSize = this.apiService.getSize(this.token).subscribe(val => {
-        console.log(val);
-        this.numberOfThings = val.registeredPieces;
+        this.numberOfThings = Number(val.size);
       });
 
       this.subType = this.apiService.getType(this.token).subscribe(val => {
-        console.log(val);
-        this.selectedOption = val.type;
+
+        this.optionsToChoose.forEach(element => {
+          if (val.type === element.name) {
+            this.selectedOption = element;
+            return;
+          }
+        });
       });
 
       this.subVegetarian = this.apiService.getVegetarian(this.token).subscribe(val => {
@@ -132,7 +136,7 @@ export class AdminPageComponent implements OnInit, OnDestroy {
   }
 
   copyToClipBoard() {
-    const text = this.apiService.getHostAddress() + 'teams/' + this.teamName;
+    const text = 'http://' + this.apiService.getHostAddress() + 'teams/' + this.teamName;
 
     document.addEventListener('copy', (e: ClipboardEvent) => {
       e.clipboardData.setData('text/plain', (text));

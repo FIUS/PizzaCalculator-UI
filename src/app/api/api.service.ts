@@ -130,17 +130,8 @@ export class ApiService {
     );
   }
 
-  patchType(teamName: string, type: string) {
-
-    let mappedType = 'persons';
-
-    if (type === 'Personen') {
-      mappedType = 'persons';
-    } else if (type === 'Stücke') {
-      mappedType = 'pizzaPieces';
-    }
-
-    return this.http.patch(this.hostAddress + 'teams/' + teamName + '/size/type', { 'type': mappedType });
+  patchType(teamName: string, type) {
+    return this.http.patch(this.hostAddress + 'teams/' + teamName + '/size/type', { 'type': type.name });
   }
 
   getVegetarian(token: string) {

@@ -14,7 +14,7 @@
       </div>
 
       <div class="preview">
-        <button mat-raised-button (click)="copyToClipBoard()">Team-Link</button>
+        <button mat-raised-button (click)="copyToClipBoard()">Copy team-link to clipboard</button>
       </div>
     </div>
 
@@ -33,7 +33,7 @@
       <mat-form-field>
         <mat-select [(ngModel)]="selectedOption">
           <mat-option *ngFor="let option of optionsToChoose " [value]="option">
-            {{option}}
+            {{option.display}}
           </mat-option>
         </mat-select>
       </mat-form-field>
