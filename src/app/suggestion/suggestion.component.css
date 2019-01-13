@@ -9,5 +9,13 @@ mat-card > mat-card-header {
 
 mat-card > mat-card-content {
   font-size: large;
-  height: 4em;
+  height: 6em;
+}
+
+mat-card > mat-card-content > div {
+  padding: 5px;
+}
+
+* {
+  font-weight: bold;
 }

@@ -1,6 +1,6 @@
 .title {
   width: 100%;
-  background-color: #ededed;
+  background-color: rgba(237, 237, 237, 0.61);
   height: 200px;
 }
 
@@ -23,7 +23,7 @@
 
 .input mat-form-field {
   margin: 10px;
-  width: 150px;
+  width: 200px;
 }
 
 .text {
@@ -36,4 +36,15 @@
   border-right: 1px solid rgba(0,0,0,.42);
   border-left: 1px solid rgba(0,0,0,.42);
   padding-bottom: 15px;
+}
+
+mat-form-field, .text {
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.preview > button {
+  font-weight: bold;
+  font-size: x-large;
+  padding: 0.5em 1em;
 }

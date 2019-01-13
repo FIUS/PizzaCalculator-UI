@@ -5,6 +5,12 @@
 
   <!-- Pizzas -->
   <div class="w-75 vote">
+    <div class="preview">
+      <button mat-raised-button (click)="showOrderPreview()">Bestellansicht</button>
+    </div>
+    <div class="pa2">
+      <mat-divider></mat-divider>
+    </div>
     <app-suggestion-list [isAdmin]="false"></app-suggestion-list>
   </div>
 

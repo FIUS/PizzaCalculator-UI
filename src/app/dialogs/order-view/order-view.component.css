@@ -1,24 +1,25 @@
-
+mat-dialog-content {
+  width: 60em;
+}
 
 .example-container {
-  width: 350px;
+  width: 50%;
   max-width: 100%;
   display: inline-block;
   vertical-align: top;
 }
 
 .example-list {
-  border: solid 1px #ccc;
   min-height: 60px;
   background: white;
-  border-radius: 4px;
   overflow: hidden;
   display: block;
 }
 
 .example-box {
-  padding: 20px 10px;
-  border-bottom: solid 1px #ccc;
+  padding: 30px 10px;
+  border: solid 1px #ccc;
+  margin: 2em 0;
   color: rgba(0, 0, 0, 0.87);
   display: flex;
   flex-direction: row;
@@ -46,10 +47,15 @@
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-.example-box:last-child {
-  border: none;
-}
-
 .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+mat-dialog-content > div > div:first-child {
+  transform: translateX(1px);
+}
+
+* {
+  font-weight: bold;
+  font-size: x-large;
 }

@@ -2,7 +2,17 @@
   <div style="height: 10px"></div>
   <button mat-raised-button (click)="openTemplates()">Vorlagen</button>
   <div style="height: 40px"></div>
-  <button mat-raised-button (click)="send()">Vorschlag absenden</button>
+  <button mat-raised-button [disabled]="ingredientSelection.selectedOptions.selected.length > 4" (click)="send()">
+    Vorschlag absenden
+  </button>
+
+  <div class="pa2" style="margin-top: 1em">
+    <mat-divider></mat-divider>
+  </div>
+
+  <div class="counter {{(ingredientSelection.selectedOptions.selected.length > 4 ? 'warning' : '')}}">
+    Toppings selected: {{ingredientSelection.selectedOptions.selected.length}}/4
+  </div>
 
   <div class="pa2">
     <mat-divider></mat-divider>
@@ -15,7 +25,4 @@
     </mat-list-option>
   </mat-selection-list>
 
-  <p>
-    Toppings selected: {{ingredientSelection.selectedOptions.selected.length}}/4
-  </p>
 </div>

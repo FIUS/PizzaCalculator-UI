@@ -4,6 +4,16 @@ mat-dialog-content {
 
 mat-card > div > button {
   margin-top: 5px;
+  padding: 0.5em 1em;
   position: relative;
   left: 75%;
+}
+
+mat-dialog-actions > button {
+  padding: 0.5em 1em;
+}
+
+* {
+  font-weight: bold;
+  font-size: x-large;
 }

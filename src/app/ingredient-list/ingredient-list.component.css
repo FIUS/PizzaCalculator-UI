@@ -1,9 +1,22 @@
-.suggest {
-
-}
-
 .suggest > button {
   display: table;
   margin: 0 auto;
 }
 
+.counter {
+  margin: 1em;
+}
+
+.warning {
+  color: red;
+}
+
+mat-list-option, .counter {
+  font-weight: bold;
+}
+
+button {
+  font-weight: bold;
+  font-size: x-large;
+  padding: 0.5em 1em;
+}

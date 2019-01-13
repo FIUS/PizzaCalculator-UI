@@ -16,7 +16,7 @@ export class SuggestionListComponent implements OnInit, OnDestroy {
   subPizzas: Subscription;
 
   teamName: string;
-  pizzas: any;
+  pizzas: any[];
 
   constructor(private apiService: ApiService, private route: ActivatedRoute, ) { }
 
