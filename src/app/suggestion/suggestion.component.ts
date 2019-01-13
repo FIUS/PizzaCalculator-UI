@@ -17,6 +17,7 @@ export class SuggestionComponent implements OnInit, OnDestroy, OnChanges {
   @Input() ingredients: string[];
   votes: number;
   @Input() isAdmin: boolean;
+  @Input() token: string;
 
   voted;
 
@@ -56,6 +57,18 @@ export class SuggestionComponent implements OnInit, OnDestroy, OnChanges {
         this.apiService.getPizzaVote(this.name, this.teamName);
       });
     }
+  }
+
+  delete() {
+
+    const sub = this.apiService.deletePizza(this.name, this.token).subscribe(val => {
+
+      console.log(val);
+      sub.unsubscribe();
+      localStorage.setItem(this.name, 'none');
+
+      this.apiService.getPizzas(this.teamName);
+    });
   }
 
   ngOnInit() {

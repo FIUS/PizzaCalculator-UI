@@ -107,6 +107,12 @@ export class ApiService {
     return this.http.post(this.hostAddress + 'pizzas', { 'teamname': teamName, 'ingredients': ingredients });
   }
 
+  deletePizza(pizzaName: string, token: string) {
+    const params = new HttpParams().set('teamname', token);
+    console.log(this.hostAddress + 'pizzas/' + pizzaName, { params: params });
+    return this.http.delete(this.hostAddress + 'pizzas/' + pizzaName, { params: params });
+  }
+
   getPizzaVote(pizzaName, teamName) {
     const resource = 'pizzas/' + pizzaName + '/vote';
     const stream = this.getStreamSource(resource);

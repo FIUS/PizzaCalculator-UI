@@ -26,7 +26,7 @@
         <mat-chip style="color: white; background-color: black;" [disabled]="true">{{votes}}</mat-chip>
       </mat-chip-list>
       <ng-container *ngIf="isAdmin">
-        <button color="warn" mat-raised-button (click)="voteUp()">Delete!</button>
+        <button color="warn" mat-raised-button (click)="delete()">Delete!</button>
       </ng-container>
     </div>
   </mat-card-actions>

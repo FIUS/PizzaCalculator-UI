@@ -16,6 +16,8 @@ export class AdminPageComponent implements OnInit, OnDestroy {
   }
 
   teamName: string;
+  token: string;
+
   subParam: Subscription;
 
   optionsToChoose = ['Personen', 'Stücke'];
@@ -43,6 +45,7 @@ export class AdminPageComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subParam = this.route.params.subscribe(params => {
       this.teamName = params['teamName'];
+      this.token = params['hash'];
     });
   }
 
