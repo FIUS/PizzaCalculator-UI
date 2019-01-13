@@ -35,7 +35,6 @@ button, mat-form-field {
 }
 
 button {
-  height: 25%;
   margin: 2vh 1vw 0;
   font-weight: bold;
   font-size: x-large;
