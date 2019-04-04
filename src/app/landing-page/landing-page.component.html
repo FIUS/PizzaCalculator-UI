@@ -22,6 +22,11 @@
         <input matInput [(ngModel)]="teamTypingInput">
       </mat-form-field>
     </div>
+
+    <div class="ma1">
+      <mat-slide-toggle [(ngModel)]="publicTeam">Public</mat-slide-toggle>
+    </div>
+
     <div class="button">
       <button mat-raised-button (click)=createTeam()>Create Team</button>
     </div>

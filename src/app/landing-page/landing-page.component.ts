@@ -15,6 +15,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   teamTypingInput: string;
   selectedTeam: string;
   teams;
+  publicTeam = false;
 
   constructor(private router: Router, private apiService: ApiService) { }
 
@@ -35,7 +36,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   createTeam() {
     if (this.teamTypingInput !== '' && this.teamTypingInput != null) {
 
-      this.apiService.postTeam(this.teamTypingInput).subscribe(val => {
+      this.apiService.postTeam(this.teamTypingInput, this.publicTeam).subscribe(val => {
         this.router.navigate(['/admin', val.name, val.hashedName]);
       });
 

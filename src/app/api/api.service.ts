@@ -110,8 +110,8 @@ export class ApiService {
     );
   }
 
-  postTeam(teamName: string): Observable<ApiObject> {
-    return this.http.post(this.hostAddress + 'teams', { 'teamname': teamName });
+  postTeam(teamName: string, publicTeam: boolean): Observable<ApiObject> {
+    return this.http.post(this.hostAddress + 'teams', { 'teamname': teamName, 'public': publicTeam });
   }
 
   getSize(token: string) {
@@ -236,7 +236,7 @@ export class ApiService {
 
     const params = new HttpParams().set('teamname', teamName);
 
-    this.http.get(this.hostAddress + resource, { params: params})
+    this.http.get(this.hostAddress + resource, { params: params })
       .subscribe(val => {
         stream.next(Object.freeze(val));
       });
@@ -261,7 +261,7 @@ export class ApiService {
 
     const params = new HttpParams().set('teamname', teamName);
 
-    this.http.get(this.hostAddress + resource, { params: params})
+    this.http.get(this.hostAddress + resource, { params: params })
       .subscribe(val => {
         stream.next(Object.freeze(val));
       });
@@ -278,7 +278,7 @@ export class ApiService {
 
     const params = new HttpParams().set('teamname', teamName);
 
-    this.http.get(this.hostAddress + resource, { params: params})
+    this.http.get(this.hostAddress + resource, { params: params })
       .subscribe(val => {
         stream.next(Object.freeze(val));
       });
@@ -322,7 +322,7 @@ export class ApiService {
 
     const params = new HttpParams().set('teamname', teamName);
 
-    this.http.get(this.hostAddress + resource, { params: params})
+    this.http.get(this.hostAddress + resource, { params: params })
       .subscribe(val => {
         stream.next(Object.freeze(val));
       });
@@ -342,7 +342,7 @@ export class ApiService {
     console.log(uuid);
     const params = new HttpParams().set('teamname', teamName).set('uuid', uuid);
 
-    this.http.get(this.hostAddress + resource, { params: params})
+    this.http.get(this.hostAddress + resource, { params: params })
       .subscribe(val => {
         stream.next(Object.freeze(val));
       });
