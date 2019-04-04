@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { OrderViewComponent } from '../dialogs/order-view/order-view.component';
 import { MatDialog } from '@angular/material';
 import { ApiService } from '../api/api.service';
+import { safeUnsubscribe } from '../util/util';
 
 export interface SelectionItem {
   display: string;
@@ -103,37 +104,30 @@ export class AdminPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.unsubscribe(this.subParam);
-    this.unsubscribe(this.subVoteMode);
-    this.unsubscribe(this.subFreeze);
-    this.unsubscribe(this.subVegetarian);
-    this.unsubscribe(this.subParam);
-  }
-
-  unsubscribe(subscription: Subscription) {
-    if (subscription != null) {
-      subscription.unsubscribe();
-    }
+    safeUnsubscribe(this.subParam);
+    safeUnsubscribe(this.subVoteMode);
+    safeUnsubscribe(this.subFreeze);
+    safeUnsubscribe(this.subVegetarian);
   }
 
   save() {
     const subSize = this.apiService.patchSize(this.token, this.numberOfThings).subscribe(val => {
-      subSize.unsubscribe();
+      safeUnsubscribe(subSize)
     });
     const subType = this.apiService.patchType(this.token, this.selectedOption).subscribe(val => {
-      subType.unsubscribe();
+      safeUnsubscribe(subType);
     });
     const subVeg = this.apiService.patchVegetarian(this.token, this.vegetarian).subscribe(val => {
-      subVeg.unsubscribe();
+      safeUnsubscribe(subVeg);
     });
     const subPork = this.apiService.patchPork(this.token, this.pork).subscribe(val => {
-      subPork.unsubscribe();
+      safeUnsubscribe(subPork);
     });
     const subMode = this.apiService.patchVoteMode(this.token, this.selectedMode).subscribe(val => {
-      subMode.unsubscribe();
+      safeUnsubscribe(subMode);
     });
     const subFr = this.apiService.patchFreeze(this.token, this.freeze).subscribe(val => {
-      subFr.unsubscribe();
+      safeUnsubscribe(subFr);
     });
   }
 

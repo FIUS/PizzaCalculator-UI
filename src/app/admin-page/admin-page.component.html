@@ -1,6 +1,6 @@
 <div class="title">
-  <button mat-raised-button [routerLink]="['/']">zurück</button>
-  <div>Admin-Page for Team: {{teamName}}</div>
+  <button mat-raised-button style="margin: 0.5rem !important" [routerLink]="['/']">zurück</button>
+  <div class="title-text">Admin-Page for Team: {{teamName}}</div>
 </div>
 <div class="input">
   <div>
@@ -14,7 +14,7 @@
       </div>
 
       <div class="preview">
-        <button mat-raised-button (click)="copyToClipBoard()">Copy team-link to clipboard</button>
+        <button mat-raised-button (click)="copyToClipBoard()">team-link</button>
       </div>
     </div>
 
@@ -57,11 +57,11 @@
 
 </div>
 <div class="preview">
-  <mat-slide-toggle [(ngModel)]="freeze">Einfrieren</mat-slide-toggle>
+  <mat-slide-toggle [(ngModel)]="freeze" class="ma2 pa2">Einfrieren</mat-slide-toggle>
 
-  <button mat-raised-button class="ma2 pr2" (click)="showOrderPreview()">Bestellansicht</button>
+  <button mat-raised-button class="ma2 pa2" (click)="showOrderPreview()">Bestellansicht</button>
 
-  <mat-form-field class="ma2 pl2">
+  <mat-form-field class="ma2 pa2">
     <mat-select [(ngModel)]="selectedMode">
       <mat-option *ngFor="let mode of modesToSelect " [value]="mode">
         {{mode.display}}
