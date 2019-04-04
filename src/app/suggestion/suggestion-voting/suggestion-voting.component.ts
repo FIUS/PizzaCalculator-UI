@@ -83,6 +83,8 @@ export class SuggestionVotingComponent implements OnInit, OnChanges, OnDestroy {
         this.votes = JSON.parse(JSON.stringify(val)).vote;
       });
 
+      // call back from params is slow enough for the name to be injected
+      this.voted = localStorage.getItem(this.teamName + this.seperator + this.name) === 'up';
     });
 
   }
@@ -90,11 +92,5 @@ export class SuggestionVotingComponent implements OnInit, OnChanges, OnDestroy {
   ngOnDestroy() {
     safeUnsubscribe(this.subParam);
     safeUnsubscribe(this.subVote);
-  }
-
-  ngOnChanges() {
-    if (this.name != null) {
-      this.voted = localStorage.getItem(this.teamName + this.seperator + this.name) === 'up';
-    }
   }
 }
