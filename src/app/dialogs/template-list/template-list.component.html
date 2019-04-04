@@ -2,7 +2,7 @@
   <h3>Vorlagen</h3>
 
   <ng-container *ngFor="let template of templates">
-    <mat-card class="pa2 ma1">
+    <mat-card class="pa2 mv2" style="background-color: lightgray">
       <b>{{template.name}}</b><br/>
       <span *ngFor="let ingredient of template.ingredients" class="pa1">
         {{ingredient}}
@@ -16,5 +16,5 @@
 
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button mat-dialog-close>cancel</button>
+  <button mat-button mat-dialog-close style="background-color: lightgray">cancel</button>
 </mat-dialog-actions>
