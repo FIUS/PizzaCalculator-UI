@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, } from '@angular/common/http';
-import { Observable, Subject, BehaviorSubject } from 'rxjs';
-import { filter, flatMap } from 'rxjs/operators';
+import { Observable, Subject, BehaviorSubject, Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 import { ApiObject } from './apiobject';
 
@@ -12,9 +12,14 @@ export class ApiService {
 
   private hostAddress = 'http://localhost:8080/';
 
+  // Uuid generation flags
+  private hasUuid = false;
+  private generatingUuid = false;
+
   private streams: Map<string, Subject<Readonly<ApiObject> | Readonly<ApiObject[]>>> = new Map();
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient) { }
 
   /**
     * Fetch the stream source for the given resource url.
@@ -35,22 +40,13 @@ export class ApiService {
     return stream;
   }
 
-  getUuid() {
+  subUuid: Subscription;
 
-    const resource = 'uuid';
+  getUuid(): string {
 
-    const localUuid = localStorage.getItem('pizzaCalculatorUuid');
-    if (localUuid == null) {
-      this.http.post(this.hostAddress + resource, {}).subscribe(val => {
-        localStorage.setItem('pizzaCalculatorUuid', JSON.parse(JSON.stringify(val)).uuid);
-        return val;
-      });
-
-    } else {
-      return localUuid;
-    }
-
-
+    // TODO implement a uuid generation
+    localStorage.setItem('pizzaCalculatorUuid', '1234567');
+    return localStorage.getItem('pizzaCalculatorUuid');
   }
 
   // ===========
@@ -61,7 +57,7 @@ export class ApiService {
     const resource = 'ingredients';
     const stream = this.getStreamSource(resource);
 
-    const result = this.http.get(this.hostAddress + resource)
+    this.http.get(this.hostAddress + resource)
       .subscribe(val => {
         stream.next(Object.freeze(val));
         // console.log(val);
@@ -81,13 +77,16 @@ export class ApiService {
     const resource = 'templates';
     const stream = this.getStreamSource(resource);
 
-    const result = this.http.get(this.hostAddress + resource)
-      .subscribe(val => stream.next(Object.freeze(val)));
+    this.http.get(this.hostAddress + resource)
+      .subscribe(val => {
+        stream.next(Object.freeze(val));
+      });
 
     return (stream.asObservable() as Observable<Readonly<ApiObject[]>>).pipe(
       filter(data => data !== undefined)
     );
   }
+
 
   postTemplates(template, teamName) {
     return this.http.post(this.hostAddress + 'pizzas/templates', { 'teamname': teamName, 'template': template });
@@ -101,7 +100,7 @@ export class ApiService {
     const resource = 'teams';
     const stream = this.getStreamSource(resource);
 
-    const result = this.http.get(this.hostAddress + resource)
+    this.http.get(this.hostAddress + resource)
       .subscribe(val => {
         stream.next(Object.freeze(val));
       });
@@ -119,7 +118,7 @@ export class ApiService {
     const resource = 'teams/' + token + '/size';
     const stream = this.getStreamSource(resource);
 
-    const result = this.http.get(this.hostAddress + resource)
+    this.http.get(this.hostAddress + resource)
       .subscribe(val => {
         stream.next(Object.freeze(val));
       });
@@ -138,7 +137,7 @@ export class ApiService {
     const resource = 'teams/' + token + '/size/type';
     const stream = this.getStreamSource(resource);
 
-    const result = this.http.get(this.hostAddress + resource)
+    this.http.get(this.hostAddress + resource)
       .subscribe(val => {
         stream.next(Object.freeze(val));
       });
@@ -156,7 +155,7 @@ export class ApiService {
     const resource = 'teams/' + token + '/vegetarian';
     const stream = this.getStreamSource(resource);
 
-    const result = this.http.get(this.hostAddress + resource)
+    this.http.get(this.hostAddress + resource)
       .subscribe(val => {
         stream.next(Object.freeze(val));
       });
@@ -175,7 +174,7 @@ export class ApiService {
     const resource = 'teams/' + token + '/no-pork';
     const stream = this.getStreamSource(resource);
 
-    const result = this.http.get(this.hostAddress + resource)
+    this.http.get(this.hostAddress + resource)
       .subscribe(val => {
         stream.next(Object.freeze(val));
       });
@@ -194,7 +193,7 @@ export class ApiService {
     const resource = 'teams/' + teamName + '/vote-mode';
     const stream = this.getStreamSource(resource);
 
-    const result = this.http.get(this.hostAddress + resource)
+    this.http.get(this.hostAddress + resource)
       .subscribe(val => {
         stream.next(Object.freeze(val));
       });
@@ -212,7 +211,7 @@ export class ApiService {
     const resource = 'teams/' + teamName + '/freeze';
     const stream = this.getStreamSource(resource);
 
-    const result = this.http.get(this.hostAddress + resource)
+    this.http.get(this.hostAddress + resource)
       .subscribe(val => {
         stream.next(Object.freeze(val));
       });
@@ -237,7 +236,7 @@ export class ApiService {
 
     const params = new HttpParams().set('teamname', teamName);
 
-    const result = this.http.get(this.hostAddress + resource, { 'params': params })
+    this.http.get(this.hostAddress + resource, { params: params})
       .subscribe(val => {
         stream.next(Object.freeze(val));
       });
@@ -262,7 +261,7 @@ export class ApiService {
 
     const params = new HttpParams().set('teamname', teamName);
 
-    const result = this.http.get(this.hostAddress + resource, { 'params': params })
+    this.http.get(this.hostAddress + resource, { params: params})
       .subscribe(val => {
         stream.next(Object.freeze(val));
       });
@@ -279,7 +278,7 @@ export class ApiService {
 
     const params = new HttpParams().set('teamname', teamName);
 
-    const result = this.http.get(this.hostAddress + resource, { 'params': params })
+    this.http.get(this.hostAddress + resource, { params: params})
       .subscribe(val => {
         stream.next(Object.freeze(val));
       });
@@ -312,12 +311,6 @@ export class ApiService {
 
     let uuid = this.getUuid();
 
-    while (uuid == null) {
-      // wait until uuid is given
-      // todo insert sleep
-      uuid = this.getUuid();
-    }
-
     return this.http.post(this.hostAddress + 'pizzas/' + pizzaName + '/pieces',
       { 'teamname': teamName, 'uuid': uuid, 'pieces': numberOfPieces });
   }
@@ -329,7 +322,7 @@ export class ApiService {
 
     const params = new HttpParams().set('teamname', teamName);
 
-    const result = this.http.get(this.hostAddress + resource, { 'params': params })
+    this.http.get(this.hostAddress + resource, { params: params})
       .subscribe(val => {
         stream.next(Object.freeze(val));
       });
@@ -346,9 +339,10 @@ export class ApiService {
 
     const uuid = this.getUuid();
 
+    console.log(uuid);
     const params = new HttpParams().set('teamname', teamName).set('uuid', uuid);
 
-    const result = this.http.get(this.hostAddress + resource, { 'params': params })
+    this.http.get(this.hostAddress + resource, { params: params})
       .subscribe(val => {
         stream.next(Object.freeze(val));
       });
