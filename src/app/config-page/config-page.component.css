@@ -1,0 +1,20 @@
+.title {
+    width: 100%;
+    background-color: rgba(237, 237, 237, 0.6);
+    height: 150px;
+  }
+  
+  .title-text {
+    position: relative;
+    transform: perspective(1px) translateY(-25%);
+    text-align: center;
+    font-size: 5em;
+    padding-bottom: 4rem;
+    padding-top: 4rem;
+  }
+
+  button {
+    font-weight: bold;
+    font-size: x-large;
+    padding: 0.5em 1em;
+  }

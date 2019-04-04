@@ -27,6 +27,7 @@ import { OrderViewComponent } from './dialogs/order-view/order-view.component';
 import { SuggestionVotingComponent } from './suggestion/suggestion-voting/suggestion-voting.component';
 import { SuggestionRegisteringComponent } from './suggestion/suggestion-registering/suggestion-registering.component';
 import { OrderElementComponent } from './dialogs/order-view/order-element/order-element.component';
+import { ConfigPageComponent } from './config-page/config-page.component';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { OrderElementComponent } from './dialogs/order-view/order-element/order-
     SuggestionVotingComponent,
     SuggestionRegisteringComponent,
     OrderElementComponent,
+    ConfigPageComponent,
   ],
   imports: [
     BrowserModule,
