@@ -1,0 +1,19 @@
+<mat-card class="ml1 mv1">
+
+  <!-- action content -->
+  <div *ngIf="!freeze; else freezed">
+    <div style="height: 10px"></div>
+    <button mat-raised-button (click)="openTemplates()">Vorlagen</button>
+    <div style="height: 40px"></div>
+
+    <button mat-raised-button [disabled]="selectedOptions?.length > 4" (click)="sendSuggestion()">
+      Vorschlag absenden
+    </button>
+  </div>
+  <ng-template #freezed>
+    Der Admin hat das Hinzufügen weiterer Vorschläge deaktiviert.
+  </ng-template>
+
+  <!-- ingredient list -->
+  <app-ingredient-list [selectedOptions]="selectedOptions" (selected)="selectedOptions = $event"></app-ingredient-list>
+</mat-card>

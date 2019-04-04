@@ -28,6 +28,7 @@ import { SuggestionVotingComponent } from './suggestion/suggestion-voting/sugges
 import { SuggestionRegisteringComponent } from './suggestion/suggestion-registering/suggestion-registering.component';
 import { OrderElementComponent } from './dialogs/order-view/order-element/order-element.component';
 import { ConfigPageComponent } from './config-page/config-page.component';
+import { TeamPageTemplateHandlingComponent } from './team-page-template-handling/team-page-template-handling.component';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { ConfigPageComponent } from './config-page/config-page.component';
     SuggestionRegisteringComponent,
     OrderElementComponent,
     ConfigPageComponent,
+    TeamPageTemplateHandlingComponent,
   ],
   imports: [
     BrowserModule,
