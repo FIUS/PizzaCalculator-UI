@@ -26,6 +26,7 @@ import { TemplateListComponent } from './dialogs/template-list/template-list.com
 import { OrderViewComponent } from './dialogs/order-view/order-view.component';
 import { SuggestionVotingComponent } from './suggestion/suggestion-voting/suggestion-voting.component';
 import { SuggestionRegisteringComponent } from './suggestion/suggestion-registering/suggestion-registering.component';
+import { OrderElementComponent } from './dialogs/order-view/order-element/order-element.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { SuggestionRegisteringComponent } from './suggestion/suggestion-register
     OrderViewComponent,
     SuggestionVotingComponent,
     SuggestionRegisteringComponent,
+    OrderElementComponent,
   ],
   imports: [
     BrowserModule,

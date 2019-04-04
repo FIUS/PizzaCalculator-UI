@@ -1,0 +1,10 @@
+<div class="example-box">
+  <div *ngIf="element?.ingredients?.size > 0; else noIngredients">
+    {{element.name}}
+  </div>
+  <ng-template #noIngredients>
+    <div *ngFor="let ingredient of element?.ingredients">
+      {{ingredient}}<br />
+    </div>
+  </ng-template>
+</div>
