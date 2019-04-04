@@ -9,7 +9,7 @@ import { safeUnsubscribe } from 'src/app/util/util';
   templateUrl: './suggestion-voting.component.html',
   styleUrls: ['./suggestion-voting.component.css']
 })
-export class SuggestionVotingComponent implements OnInit, OnChanges, OnDestroy {
+export class SuggestionVotingComponent implements OnInit, OnDestroy {
 
   subParam: Subscription;
   subVote: Subscription;
