@@ -12,10 +12,6 @@
       <div class="text">
         Gesamtzahl
       </div>
-
-      <div class="preview">
-        <button mat-raised-button (click)="copyToClipBoard()">team-link</button>
-      </div>
     </div>
 
     <!-- Vegetarien -->
@@ -29,14 +25,6 @@
         </div>
       </div>
 
-      <!-- Selector -->
-      <mat-form-field>
-        <mat-select [(ngModel)]="selectedOption">
-          <mat-option *ngFor="let option of optionsToChoose " [value]="option">
-            {{option.display}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
     </div>
 
     <!-- Pork -->
@@ -47,15 +35,36 @@
       <div class="text">
         Anzahl Nicht-Schwein
       </div>
-
-      <div class="preview">
-        <button mat-raised-button (click)="save()">Speichern</button>
-      </div>
     </div>
   </div>
-
-
 </div>
+
+<!-- second row -->
+<div class="preview">
+
+  <!-- Team-link -->
+  <span class="ma3">
+    <button mat-raised-button (click)="copyToClipBoard()">team-link</button>
+  </span>
+
+  <!-- Selector -->
+  <span class="ma3">
+    <mat-form-field>
+      <mat-select [(ngModel)]="selectedOption">
+        <mat-option *ngFor="let option of optionsToChoose " [value]="option">
+          {{option.display}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </span>
+
+  <!-- Save -->
+  <span class="ma3">
+    <button mat-raised-button (click)="save()">Speichern</button>
+  </span>
+</div>
+
+<!-- third row -->
 <div class="preview">
   <mat-slide-toggle [(ngModel)]="freeze" class="ma2 pa2">Einfrieren</mat-slide-toggle>
 
