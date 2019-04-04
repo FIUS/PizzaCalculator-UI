@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/api/api.service';
 import { Subscription } from 'rxjs';
@@ -9,12 +9,13 @@ import { safeUnsubscribe } from 'src/app/util/util';
   templateUrl: './suggestion-registering.component.html',
   styleUrls: ['./suggestion-registering.component.css']
 })
-export class SuggestionRegisteringComponent implements OnInit {
+export class SuggestionRegisteringComponent implements OnInit, OnChanges, OnDestroy {
 
   constructor(private route: ActivatedRoute, private apiService: ApiService) { }
 
   subParam: Subscription;
-  subVote: Subscription;
+  subMyPieces: Subscription;
+  subAllPieces: Subscription;
 
   @Input() name: string;
   @Input() ingredients: string[];
@@ -32,6 +33,7 @@ export class SuggestionRegisteringComponent implements OnInit {
   ngOnInit() {
     this.subParam = this.route.params.subscribe(params => {
       this.teamName = params['teamName'];
+      this.ngOnChanges();
     });
   }
 
@@ -46,6 +48,28 @@ export class SuggestionRegisteringComponent implements OnInit {
     });
   }
 
+  ngOnDestroy() {
+    safeUnsubscribe(this.subParam);
+    safeUnsubscribe(this.subMyPieces)
+    safeUnsubscribe(this.subAllPieces);
+  }
+
+  ngOnChanges() {
+    
+    if (this.name != null && this.teamName != null) {
+
+      safeUnsubscribe(this.subMyPieces);
+      this.subMyPieces = this.apiService.getMyPiecesOfPizza(this.name, this.teamName).subscribe(val => {
+        console.log('my', val);
+        // TODO set requiredPieces
+      });
+
+      safeUnsubscribe(this.subAllPieces);
+      this.subAllPieces = this.apiService.getAllPiecesOfPizza(this.name, this.teamName).subscribe(val => {
+        this.totalPieces = (val as any).total;
+      });
+    }
+  }
 
   sendRequired() {
     this.apiService.postRequiredPieces(this.name, this.teamName, this.requiredPieces).subscribe(val => {

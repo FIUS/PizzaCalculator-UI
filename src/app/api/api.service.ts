@@ -344,8 +344,9 @@ export class ApiService {
     const resource = 'pizzas/' + pizzaName + '/pieces';
     const stream = this.getStreamSource(resource);
 
+    const uuid = this.getUuid();
 
-    const params = new HttpParams().set('teamname', teamName);
+    const params = new HttpParams().set('teamname', teamName).set('uuid', uuid);
 
     const result = this.http.get(this.hostAddress + resource, { 'params': params })
       .subscribe(val => {

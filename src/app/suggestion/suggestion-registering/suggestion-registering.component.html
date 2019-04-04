@@ -11,13 +11,15 @@
   </mat-card-content>
   <mat-card-actions>
 
-      <mat-form-field>
-        <input matInput [(ngModel)]="requiredPieces">
+      <mat-form-field style="width: 5rem">
+        <input matInput type="number" [(ngModel)]="requiredPieces">
       </mat-form-field>
   
       <button color="primary" mat-raised-button (click)="sendRequired()">submit</button>
 
-      TEXT
+      <span>
+        Total: {{totalPieces}}
+      </span>
   </mat-card-actions>
 </mat-card>
   
