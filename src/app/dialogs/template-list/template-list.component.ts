@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy, OnChanges, Inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { ApiService } from 'src/app/api/api.service';
 import { Subscription } from 'rxjs';
 import { MAT_DIALOG_DATA } from '@angular/material';
+import { safeUnsubscribe } from 'src/app/util/util';
 
 @Component({
   selector: 'app-template-list',
@@ -10,7 +11,6 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 })
 export class TemplateListComponent implements OnInit, OnDestroy {
 
-  subParam: Subscription;
   subTemplates: Subscription;
 
   teamName: string;
@@ -23,25 +23,19 @@ export class TemplateListComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     this.subTemplates = this.apiService.getTemplates().subscribe(val => {
-      console.log(val);
       this.templates = val;
     });
   }
 
   ngOnDestroy() {
-    this.unsubscribe(this.subParam);
-    this.unsubscribe(this.subTemplates);
+    safeUnsubscribe(this.subTemplates);
   }
 
-  unsubscribe(subscription: Subscription) {
-    if (subscription != null) {
-      subscription.unsubscribe();
-    }
-  }
 
   select(template) {
-    this.apiService.postTemplates(template, this.teamName).subscribe(val => {
+    const subTemp = this.apiService.postTemplates(template, this.teamName).subscribe(val => {
       this.apiService.getPizzas(this.teamName);
+      safeUnsubscribe(subTemp);
     });
   }
 
