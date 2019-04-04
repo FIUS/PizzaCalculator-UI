@@ -28,7 +28,6 @@ export class OrderViewComponent implements OnInit, OnDestroy {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    console.log(event.previousContainer === event.container, event.previousContainer, event.container);
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
