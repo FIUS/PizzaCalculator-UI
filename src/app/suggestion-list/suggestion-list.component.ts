@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ApiService } from '../api/api.service';
 import { ActivatedRoute } from '@angular/router';
+import { safeUnsubscribe } from '../util/util';
 
 @Component({
   selector: 'app-suggestion-list',
@@ -13,8 +14,11 @@ export class SuggestionListComponent implements OnInit, OnDestroy {
   @Input() isAdmin: boolean;
   @Input() token = '';
 
+  subVoteMode: Subscription;
   subParam: Subscription;
   subPizzas: Subscription;
+
+  voteMode;
 
   teamName: string;
   pizzas: any[];
@@ -28,18 +32,22 @@ export class SuggestionListComponent implements OnInit, OnDestroy {
       this.subPizzas = this.apiService.getPizzas(this.teamName).subscribe(val => {
         this.pizzas = val;
       });
+
+      this.subVoteMode = this.apiService.getVoteMode(this.teamName).subscribe(val => {
+        this.voteMode = val.voteMode;
+
+        if (this.voteMode === 'registration') {
+          // TODO subscribe/poll
+        }
+      });
+
     });
   }
 
   ngOnDestroy() {
-    this.unsubscribe(this.subParam);
-    this.unsubscribe(this.subPizzas);
-  }
-
-  unsubscribe(subscription: Subscription) {
-    if (subscription != null) {
-      subscription.unsubscribe();
-    }
+    safeUnsubscribe(this.subParam);
+    safeUnsubscribe(this.subVoteMode);
+    safeUnsubscribe(this.subPizzas);
   }
 
 }

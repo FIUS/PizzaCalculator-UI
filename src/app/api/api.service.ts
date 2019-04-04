@@ -308,8 +308,7 @@ export class ApiService {
   // REGISTRATION MODE
   // =================
 
-  postRequiredPieces(pizzaName, teamName, numberOfPieces) {
-
+  postRequiredPieces(pizzaName: string, teamName: string, numberOfPieces) {
 
     let uuid = this.getUuid();
 
@@ -323,8 +322,39 @@ export class ApiService {
       { 'teamname': teamName, 'uuid': uuid, 'pieces': numberOfPieces });
   }
 
-  getRequiredPieces(pizzaName, teamName) {
-    // TODO implement
+  getAllPiecesOfPizza(pizzaName: string, teamName: string) {
+    const resource = 'pizzas/' + pizzaName + '/pieces/total';
+    const stream = this.getStreamSource(resource);
+
+
+    const params = new HttpParams().set('teamname', teamName);
+
+    const result = this.http.get(this.hostAddress + resource, { 'params': params })
+      .subscribe(val => {
+        stream.next(Object.freeze(val));
+      });
+
+    return (stream.asObservable() as Observable<Readonly<ApiObject[]>>).pipe(
+      filter(data => data !== undefined)
+    );
+  }
+
+  getMyPiecesOfPizza(pizzaName: string, teamName: string) {
+
+    const resource = 'pizzas/' + pizzaName + '/pieces';
+    const stream = this.getStreamSource(resource);
+
+
+    const params = new HttpParams().set('teamname', teamName);
+
+    const result = this.http.get(this.hostAddress + resource, { 'params': params })
+      .subscribe(val => {
+        stream.next(Object.freeze(val));
+      });
+
+    return (stream.asObservable() as Observable<Readonly<ApiObject[]>>).pipe(
+      filter(data => data !== undefined)
+    );
   }
 
   public getHostAddress() {

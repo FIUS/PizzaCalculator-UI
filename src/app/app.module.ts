@@ -19,12 +19,13 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { TeamPageComponent } from './team-page/team-page.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { FooterComponent } from './footer/footer.component';
-import { SuggestionComponent } from './suggestion/suggestion.component';
 import { ErrorMessageComponent } from './dialogs/error-message/error-message.component';
 import { SuggestionListComponent } from './suggestion-list/suggestion-list.component';
 import { IngredientListComponent } from './ingredient-list/ingredient-list.component';
 import { TemplateListComponent } from './dialogs/template-list/template-list.component';
 import { OrderViewComponent } from './dialogs/order-view/order-view.component';
+import { SuggestionVotingComponent } from './suggestion/suggestion-voting/suggestion-voting.component';
+import { SuggestionRegisteringComponent } from './suggestion/suggestion-registering/suggestion-registering.component';
 
 
 @NgModule({
@@ -34,12 +35,13 @@ import { OrderViewComponent } from './dialogs/order-view/order-view.component';
     TeamPageComponent,
     AdminPageComponent,
     FooterComponent,
-    SuggestionComponent,
     ErrorMessageComponent,
     SuggestionListComponent,
     IngredientListComponent,
     TemplateListComponent,
     OrderViewComponent,
+    SuggestionVotingComponent,
+    SuggestionRegisteringComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,31 @@
+<mat-card>
+    <mat-card-header>
+      {{name}}
+    </mat-card-header>
+    <mat-card-content>
+      <ng-container *ngFor="let ingredient of ingredients">
+        <div>
+          {{ingredient}}
+        </div>
+      </ng-container>
+    </mat-card-content>
+    <mat-card-actions class="inline-flex">
+      <ng-container *ngIf="voted; else up">
+        <button color="secondary" mat-raised-button (click)="voteDown()">Undo</button>
+      </ng-container>
+      <ng-template #up>
+        <button color="primary" mat-raised-button (click)="voteUp()">Vote up!</button>
+      </ng-template>
+
+      <span class="pa2">
+        <mat-chip style="color: white; background-color: black;" [disabled]="true">{{votes}}</mat-chip>
+      </span>
+      <ng-container *ngIf="isAdmin">
+        <button color="warn" mat-raised-button (click)="delete()">Delete!</button>
+      </ng-container>
+      
+      <!-- chip list has to be loaded for mat-chip to work -->
+      <mat-chip-list></mat-chip-list>
+  </mat-card-actions>
+</mat-card>
+  

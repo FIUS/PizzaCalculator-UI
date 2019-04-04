@@ -1,0 +1,26 @@
+mat-card {
+    margin: 5px;
+    font-size: xx-large;
+  }
+  
+  mat-card > mat-card-header {
+    white-space: nowrap;
+  }
+  
+  mat-card > mat-card-content {
+    font-size: large;
+    height: 6em;
+  }
+  
+  mat-card > mat-card-content > div {
+    padding: 5px;
+  }
+  
+  button {
+    width: 7em;
+  }
+  
+  * {
+    font-weight: bold;
+  }
+  

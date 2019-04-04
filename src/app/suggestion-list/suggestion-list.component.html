@@ -4,8 +4,14 @@
       So empty in here... Create a suggestion!
     </div>
   </ng-container>
-  <ng-container *ngFor="let element of pizzas">
-    <app-suggestion class="flex" [name]="element.name" votes="3" [ingredients]="element.ingredients" [isAdmin]="isAdmin"
-      [token]="token"></app-suggestion>
-  </ng-container>
+  <div *ngFor="let element of pizzas">
+    <div *ngIf="voteMode === 'std'">
+      <app-suggestion-voting class="flex" [name]="element.name" [ingredients]="element.ingredients" [isAdmin]="isAdmin"
+      [token]="token" [votes]="element.vote"></app-suggestion-voting>
+    </div>
+    <div *ngIf="voteMode === 'registration'">
+      <app-suggestion-registering class="flex" [name]="element.name" [ingredients]="element.ingredients" [isAdmin]="isAdmin"
+      [token]="token"></app-suggestion-registering>
+    </div>
+  </div>
 </div>

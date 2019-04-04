@@ -1,29 +1,26 @@
-import { Component, Input, OnChanges, OnInit, OnDestroy } from '@angular/core';
-import { ApiService } from '../api/api.service';
+import { Component, OnInit, Input, OnChanges, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ApiService } from 'src/app/api/api.service';
 import { Subscription } from 'rxjs';
+import { safeUnsubscribe } from 'src/app/util/util';
 
 @Component({
-  selector: 'app-suggestion',
-  templateUrl: './suggestion.component.html',
-  styleUrls: ['./suggestion.component.css']
+  selector: 'app-suggestion-voting',
+  templateUrl: './suggestion-voting.component.html',
+  styleUrls: ['./suggestion-voting.component.css']
 })
-export class SuggestionComponent implements OnInit, OnDestroy, OnChanges {
+export class SuggestionVotingComponent implements OnInit, OnChanges, OnDestroy {
 
   subParam: Subscription;
   subVote: Subscription;
-  subVoteMode: Subscription;
 
   @Input() name: string;
   @Input() ingredients: string[];
-  votes: number;
   @Input() isAdmin: boolean;
   @Input() token: string;
+  @Input() votes;
 
   voted;
-  voteMode;
-  requiredPieces;
-  totalPieces;
 
   teamName: string;
 
@@ -40,6 +37,7 @@ export class SuggestionComponent implements OnInit, OnDestroy, OnChanges {
       // call upvote
       const sub = this.apiService.vote(this.name, this.teamName, true).subscribe(val => {
 
+        console.log(val);
         sub.unsubscribe();
         localStorage.setItem(this.teamName + this.seperator + this.name, 'up');
         this.voted = true;
@@ -85,29 +83,13 @@ export class SuggestionComponent implements OnInit, OnDestroy, OnChanges {
         this.votes = JSON.parse(JSON.stringify(val)).vote;
       });
 
-      this.subVoteMode = this.apiService.getVoteMode(this.teamName).subscribe(val => {
-        this.voteMode = val.voteMode;
-
-        if (this.voteMode === 'registration') {
-          // TODO subscribe
-        }
-
-
-      });
     });
 
   }
 
   ngOnDestroy() {
-    if (this.subParam != null) {
-      this.subParam.unsubscribe();
-    }
-    if (this.subVote != null) {
-      this.subVote.unsubscribe();
-    }
-    if (this.subVoteMode != null) {
-      this.subVoteMode.unsubscribe();
-    }
+    safeUnsubscribe(this.subParam);
+    safeUnsubscribe(this.subVote);
   }
 
   ngOnChanges() {
@@ -115,12 +97,4 @@ export class SuggestionComponent implements OnInit, OnDestroy, OnChanges {
       this.voted = localStorage.getItem(this.teamName + this.seperator + this.name) === 'up';
     }
   }
-
-
-  sendRequired() {
-    this.apiService.postRequiredPieces(this.name, this.teamName, this.requiredPieces).subscribe(val => {
-      console.log(val);
-    });
-  }
-
 }
