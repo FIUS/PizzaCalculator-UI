@@ -1,7 +1,9 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ApiService } from 'src/app/api/api.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem, CdkDrag } from '@angular/cdk/drag-drop';
+import { Subscription } from 'rxjs';
+import { safeUnsubscribe } from 'src/app/util/util';
 
 
 @Component({
@@ -9,7 +11,9 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem, CdkDrag } from '@angul
   templateUrl: './order-view.component.html',
   styleUrls: ['./order-view.component.css']
 })
-export class OrderViewComponent implements OnInit {
+export class OrderViewComponent implements OnInit, OnDestroy {
+
+  subOrder: Subscription;
 
   order;
   teamName: string;
@@ -37,14 +41,15 @@ export class OrderViewComponent implements OnInit {
 
   ngOnInit() {
 
-    this.apiService.getOrder(this.teamName).subscribe(val => {
+    safeUnsubscribe(this.subOrder);
+    this.subOrder = this.apiService.getOrder(this.teamName).subscribe(val => {
       this.order = val;
 
       this.left = [];
       this.right = [];
 
       let counter = 0;
-      val.forEach(element => {
+      this.order.forEach(element => {
         if (counter % 2 === 0) {
           this.left.push(element);
         } else {
@@ -54,6 +59,10 @@ export class OrderViewComponent implements OnInit {
       });
 
     });
+  }
+
+  ngOnDestroy() {
+    safeUnsubscribe(this.subOrder);
   }
 
 }
