@@ -15,7 +15,16 @@
       New Template
     </mat-card-title>
 
-    <app-ingredient-list></app-ingredient-list>
+    <mat-form-field class="ma2">
+      <input matInput placeholder="Template Name" [(ngModel)]="name">
+    </mat-form-field>
+
+
+    <button mat-raised-button (click)="newTemplate()">
+      create new template
+    </button>
+
+    <app-ingredient-list [selectedOptions]="ingredients" (selected)="ingredients = $event"></app-ingredient-list>
   </mat-card>
 
   <!-- manage templates-->
@@ -24,6 +33,41 @@
       Manage Templates
     </mat-card-title>
 
+    <mat-list>
+      <mat-list-item *ngFor="let template of templates" class="flex">
+
+        <!-- template data -->
+        <div class="flex-grow-1">
+          <p matLine>
+            <b>
+              {{template.name}}
+            </b>
+          </p>
+
+          <p matLine>
+            <span class="mr2" *ngFor="let ingredient of template?.ingredients">
+              {{ingredient}}
+            </span>
+          </p>
+
+          <p matLine>
+            vegetarian: {{template?.vegetarian}}
+          </p>
+
+          <p matLine>
+            pork: {{template?.pork}}
+          </p>
+        </div>
+
+        <!-- Buttons -->
+        <div class="w-20">
+          <button mat-raised-button color="warn" (click)="deleteTemplate(template)">
+            <mat-icon>delete</mat-icon>
+          </button>
+
+        </div>
+      </mat-list-item>
+    </mat-list>
 
   </mat-card>
 </div>

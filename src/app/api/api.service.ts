@@ -87,6 +87,23 @@ export class ApiService {
     );
   }
 
+  postTemplate(name: string, ingredients: any[]) {
+
+    const tempIngredients = [];
+    ingredients.forEach(element => {
+      tempIngredients.push(element.name);
+    });
+
+    return this.http.post(this.hostAddress + 'templates', { 'name': name, 'ingredients': tempIngredients }).subscribe(val => {
+      this.getTemplates();
+    });
+  }
+
+  deleteTemplate(template) {
+    const params = new HttpParams().set('template', template.name);
+    return this.http.delete(this.hostAddress + 'templates', { params: params });
+  }
+
 
   postTemplates(template, teamName) {
     return this.http.post(this.hostAddress + 'pizzas/templates', { 'teamname': teamName, 'template': template });

@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ApiService } from '../api/api.service';
+import { safeUnsubscribe } from '../util/util';
 
 @Component({
   selector: 'app-ingredient-list',
@@ -13,9 +14,9 @@ export class IngredientListComponent implements OnInit, OnDestroy {
   subIngredients: Subscription;
   subFreeze: Subscription;
 
-  ingredients: any;
+  ingredients: any[] = [];
   @Output() selected = new EventEmitter<any>();
-  @Input() selectedOptions: any;
+  @Input() selectedOptions: any[] = [];
 
   constructor(private apiService: ApiService) { }
 
@@ -28,20 +29,13 @@ export class IngredientListComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     this.subIngredients = this.apiService.getIngredients().subscribe(val => {
-      this.ingredients = val;
+      this.ingredients = JSON.parse(JSON.stringify(val));
     });
   }
 
   ngOnDestroy() {
-    this.unsubscribe(this.subIngredients);
-    this.unsubscribe(this.subParam);
+    safeUnsubscribe(this.subIngredients);
+    safeUnsubscribe(this.subParam);
   }
-
-  unsubscribe(subscription: Subscription) {
-    if (subscription != null) {
-      subscription.unsubscribe();
-    }
-  }
-
 
 }
