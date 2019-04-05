@@ -101,7 +101,7 @@ export class ApiService {
 
   deleteTemplate(template) {
     const params = new HttpParams().set('template', template.name);
-    return this.http.delete(this.hostAddress + 'templates', { params: params });
+    return this.http.delete(this.hostAddress + 'templates/' + template.name, { params: params });
   }
 
 
