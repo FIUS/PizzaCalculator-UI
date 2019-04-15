@@ -1,35 +1,41 @@
 <!-- TODO find better way for coloring -->
 <div class="example-box" *ngIf="element?.vegetarian === true" style="background-color: darkseagreen">
-  <div *ngIf="element?.ingredients?.size > 0; else noIngredients">
-    {{element.name}}
+  <div *ngIf="hasName">
+    <b><u>
+        {{element.name}}
+      </u></b>
   </div>
-  <ng-template #noIngredients>
+  <div *ngIf="hasIngredients">
     <div *ngFor="let ingredient of element?.ingredients">
       {{ingredient}}<br />
     </div>
-  </ng-template>
+  </div>
 </div>
 
 <div class="example-box" *ngIf="element?.vegetarian === false && element?.pork === false"
   style="background-color: lightblue">
-  <div *ngIf="element?.ingredients?.size > 0; else noIngredients">
-    {{element.name}}
+  <div *ngIf="hasName">
+    <b><u>
+        {{element.name}}
+      </u></b>
   </div>
-  <ng-template #noIngredients>
+  <div *ngIf="hasIngredients">
     <div *ngFor="let ingredient of element?.ingredients">
       {{ingredient}}<br />
     </div>
-  </ng-template>
+  </div>
 </div>
 
 <div class="example-box" *ngIf="element?.vegetarian === false && element?.pork === true"
   style="background-color: gainsboro">
-  <div *ngIf="element?.ingredients?.size > 0; else noIngredients">
-    {{element.name}}
+  <div *ngIf="hasName">
+    <b><u>
+        {{element.name}}
+      </u></b>
   </div>
-  <ng-template #noIngredients>
+  <div *ngIf="hasIngredients">
     <div *ngFor="let ingredient of element?.ingredients">
       {{ingredient}}<br />
     </div>
-  </ng-template>
+  </div>
 </div>
