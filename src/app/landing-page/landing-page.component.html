@@ -4,13 +4,17 @@
 <div class="interactive">
   <div class="goto flex flex-wrap">
     <div class="form-field">
-      <mat-form-field>
-        <mat-select placeholder="Go to page for team" [(value)]="selectedTeam">
-          <mat-option *ngFor="let team of teams" [value]="team">
-            {{team}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+      <form>
+        <mat-form-field>
+          <input type="text" placeholder="Go to page for team" matInput [formControl]="teamNameFormControl"
+            [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let team of filteredOptions | async" [value]="team">
+              {{team}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
     </div>
     <div class="button">
       <button mat-raised-button (click)="goToTeam()">Go to team page</button>
@@ -19,7 +23,7 @@
   <div class="create flex flex-wrap">
     <div class="form-field">
       <mat-form-field>
-        <input matInput [(ngModel)]="teamTypingInput">
+        <input matInput placeholder="create a new team" [(ngModel)]="teamTypingInput">
       </mat-form-field>
     </div>
 

@@ -1,7 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from '../api/api.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
+import { FormControl } from '@angular/forms';
+import { startWith, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-landing-page',
@@ -12,10 +14,15 @@ export class LandingPageComponent implements OnInit, OnDestroy {
 
   subTeams: Subscription;
 
+  // new team
   teamTypingInput: string;
-  selectedTeam: string;
-  teams;
   publicTeam = false;
+
+  // join an existing team
+  teamNameFormControl = new FormControl();
+  filteredOptions: Observable<string[]>;
+  teams;
+
 
   constructor(private router: Router, private apiService: ApiService) { }
 
@@ -24,7 +31,14 @@ export class LandingPageComponent implements OnInit, OnDestroy {
       this.teams = val;
 
       this.apiService.getUuid();
+
+      this.filteredOptions = this.teamNameFormControl.valueChanges
+        .pipe(
+          startWith(''),
+          map(value => this._filter(value))
+        );
     });
+
   }
 
   ngOnDestroy() {
@@ -44,8 +58,14 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   }
 
   goToTeam() {
-    if (this.selectedTeam !== '' && this.selectedTeam != null) {
-      this.router.navigate(['/team/', this.selectedTeam]);
+    if (this.teamNameFormControl.value !== '' && this.teamNameFormControl.value != null) {
+      this.router.navigate(['/team/', this.teamNameFormControl.value]);
     }
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.teams.filter(option => option.toLowerCase().includes(filterValue));
   }
 }
