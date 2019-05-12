@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   settings: {
-    api: 'http://localhost:8080',
+    api: this.process.env.backendURL,
 }
 };
 
