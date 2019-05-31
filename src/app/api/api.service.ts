@@ -4,13 +4,14 @@ import { Observable, Subject, BehaviorSubject, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
 import { ApiObject } from './apiobject';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-  private hostAddress = 'http://localhost:8080/';
+  private hostAddress = environment.settings.api;
 
   // Uuid generation flags
   private hasUuid = false;
